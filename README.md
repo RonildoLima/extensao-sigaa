@@ -124,11 +124,11 @@ Para testar de verdade, carregue a pasta em `chrome://extensions` e use **Recarr
 2. Crie a tag com o mesmo número e envie: `git tag v0.1.1` e `git push origin v0.1.1`.
 3. O workflow [`release.yml`](.github/workflows/release.yml) roda sozinho: confere o manifest com `scripts/verificar-release.js` (arquivos referenciados existem e a tag bate com a versão), gera `sigaa-moderno-v0.1.1.zip` só com `manifest.json`, `src/` e `icons/`, e cria a Release com as notas geradas dos commits. Acompanhe na aba **Actions** do GitHub.
 
-Para conferir antes de criar a tag: `node scripts/verificar-release.js v0.1.1`. O mesmo `.zip` serve para enviar à Chrome Web Store, se a extensão for publicada lá.
+Para conferir antes de criar a tag: `node scripts/verificar-release.js v0.1.1`. O mesmo `.zip` serve para enviar à Chrome Web Store. Os textos do painel da loja e as capturas de tela (1280×800, versão web) estão em [`loja/`](loja/descricao.md).
 
 ## Privacidade
 
-Nenhum dado é coletado ou enviado. A extensão guarda só:
+A política completa está em [PRIVACY.md](PRIVACY.md). Em resumo, nenhum dado é coletado ou enviado. A extensão guarda só:
 
 - duas preferências (`enabled` e `theme`) em `chrome.storage.sync` e um espelho delas no `localStorage` do próprio SIGAA (chave `sg-prefs`) para aplicar o tema antes da primeira pintura;
 - uma cópia do menu do portal (rótulos e ações, nada pessoal) em `chrome.storage.local`, para a busca funcionar fora do portal;
