@@ -71,8 +71,9 @@ Há duas formas de usar a extensão. Escolha a que combina com você:
 
 ### Opção 1: pela Chrome Web Store
 
-**Link da loja:** _em breve_.
-<!-- TODO(loja): quando a Chrome Web Store aprovar a extensão, troque "em breve" pelo link da página dela. -->
+**Link da loja:** _em análise pela Chrome Web Store (enviada em 23/10/2026). O link aparece aqui quando for aprovada; até lá, use a [Opção 2](#opção-2-baixar-e-ajustar-no-seu-computador)._
+<!-- TODO(loja): quando a Chrome Web Store aprovar, troque a linha "Link da loja" acima por: **Link da loja:** [SIGAA Moderno na Chrome Web Store](URL_DA_PAGINA_DA_LOJA) -->
+<!-- Esse é o único ponto do README que muda na aprovação. Passos completos em loja/descricao.md, seção "Quando a loja aprovar". -->
 
 1. Abra a página da extensão na Chrome Web Store (link acima).
 2. Clique em **Usar no Chrome** (*Add to Chrome*, se estiver em inglês) e confirme.

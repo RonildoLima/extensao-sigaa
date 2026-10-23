@@ -100,10 +100,32 @@ Para ver o efeito sem conta: abra https://sigaa.ufcg.edu.br/sigaa/verTelaLogin.d
 A busca no menu (Ctrl+K) usa o menu do Portal do Discente, que só existe depois do login. Sem login, a busca mostra um aviso pedindo para abrir o Portal do Discente uma vez para copiar os itens do menu.
 ```
 
-## Antes de enviar
+## Envio (feito em 23/10/2026)
 
-- [ ] Conta de desenvolvedor criada, com e-mail dedicado e verificação em duas etapas.
-- [ ] `.zip` da Release (`sigaa-moderno-v0.1.0.zip`), com o `manifest.json` na raiz.
-- [ ] Repositório público (ou política hospedada em outro endereço público).
-- [ ] Capturas e tile enviados na ordem acima.
-- [ ] Textos das abas Privacy e Distribution preenchidos.
+- [x] Conta de desenvolvedor criada, com e-mail dedicado e verificação em duas etapas.
+- [x] `.zip` da Release (`sigaa-moderno-v0.1.0.zip`), com o `manifest.json` na raiz.
+- [x] Repositório público (a URL da política de privacidade abre sem login).
+- [x] Capturas e tile enviados na ordem acima.
+- [x] Textos das abas Privacy e Distribution preenchidos.
+- [x] Enviada para análise.
+
+## Quando a loja aprovar
+
+A revisão costuma levar de alguns dias a algumas semanas e o resultado chega por e-mail, para o endereço de desenvolvedor da conta. Depois da aprovação você tem **30 dias** para publicar (a menos que tenha marcado a publicação automática).
+
+1. No painel do desenvolvedor, abra a extensão e copie o endereço da página dela, no formato `https://chromewebstore.google.com/detail/<nome>/<id>`. Como a visibilidade é **não listada**, só quem tem esse link instala: ele é o que vai no README.
+2. No `README.md`, procure `TODO(loja)` e troque a linha **Link da loja** por:
+
+   ```md
+   **Link da loja:** [SIGAA Moderno na Chrome Web Store](URL_DA_PAGINA_DA_LOJA)
+   ```
+
+   Apague os dois comentários `<!-- ... -->` logo abaixo da linha. É o único ponto do README que muda.
+3. *(Opcional)* No GitHub, em **About** (engrenagem ao lado de "About" na página inicial do repositório), coloque o link da loja em **Website**.
+4. Faça o commit e o push (por exemplo "Adiciona o link da Chrome Web Store ao README").
+
+Para pedir a um agente de IA, basta dizer: `A extensão foi aprovada na Chrome Web Store: <URL>. Atualize o README e faça o commit e o push.`
+
+**Se a loja rejeitar:** o e-mail diz qual política foi violada. Corrija, aumente `version` no `manifest.json`, crie a tag e a Release (veja "Publicar uma versão" no README) e envie o novo `.zip` em **Package → Upload new package**.
+
+**Versões novas depois da aprovação:** o mesmo caminho do parágrafo acima. O `.zip` da Release serve direto, e a versão do `manifest.json` precisa ser maior que a publicada.
