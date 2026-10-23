@@ -62,7 +62,7 @@ Nunca commite capturas de telas logadas, nomes, matrículas, `jsessionid` nem cr
 
 Para uma versão nova: aumente `version` no `manifest.json`, faça o commit e crie a tag `vX.Y.Z` com o mesmo número. O workflow `.github/workflows/release.yml` gera o `.zip` e a Release (detalhes no README, "Publicar uma versão"). O mesmo `.zip` vai para a Chrome Web Store, cujos textos estão em `loja/descricao.md`.
 
-**Pendência conhecida:** a extensão foi enviada à Chrome Web Store em 23/10/2026 e o README ainda diz "em análise" (procure `TODO(loja)`). Se a pessoa avisar que foi aprovada e passar o link, siga a seção "Quando a loja aprovar" de `loja/descricao.md`: troque só a linha "Link da loja" do README, apague os comentários `TODO`, faça o commit e o push.
+**Chrome Web Store:** a extensão está publicada, como **não listada**, em <https://chromewebstore.google.com/detail/sigaa-moderno-ufcg/gmpbhgljjdbimppdologlnfkchldbhkh> (ID `gmpbhgljjdbimppdologlnfkchldbhkh`). O link já está no README. Uma versão nova segue o caminho acima e depois é enviada à loja em **Package → Upload new package**, com o passo a passo em `loja/descricao.md`.
 
 ## Estilo
 

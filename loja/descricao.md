@@ -108,19 +108,22 @@ A busca no menu (Ctrl+K) usa o menu do Portal do Discente, que só existe depois
 - [x] Capturas e tile enviados na ordem acima.
 - [x] Textos das abas Privacy e Distribution preenchidos.
 - [x] Enviada para análise.
+- [x] Aprovada e publicada como não listada, com o link no README.
 
 ## Quando a loja aprovar
+
+**Concluído:** a extensão foi aprovada e o link já está no README: <https://chromewebstore.google.com/detail/sigaa-moderno-ufcg/gmpbhgljjdbimppdologlnfkchldbhkh> (ID da extensão: `gmpbhgljjdbimppdologlnfkchldbhkh`). Os passos abaixo ficam de referência para quando o endereço mudar ou para uma nova publicação.
 
 A revisão costuma levar de alguns dias a algumas semanas e o resultado chega por e-mail, para o endereço de desenvolvedor da conta. Depois da aprovação você tem **30 dias** para publicar (a menos que tenha marcado a publicação automática).
 
 1. No painel do desenvolvedor, abra a extensão e copie o endereço da página dela, no formato `https://chromewebstore.google.com/detail/<nome>/<id>`. Como a visibilidade é **não listada**, só quem tem esse link instala: ele é o que vai no README.
-2. No `README.md`, procure `TODO(loja)` e troque a linha **Link da loja** por:
+2. No `README.md`, procure a linha **Link da loja** (na "Opção 1") e deixe assim:
 
    ```md
    **Link da loja:** [SIGAA Moderno na Chrome Web Store](URL_DA_PAGINA_DA_LOJA)
    ```
 
-   Apague os dois comentários `<!-- ... -->` logo abaixo da linha. É o único ponto do README que muda.
+   É o único ponto do README que depende do endereço da loja.
 3. *(Opcional)* No GitHub, em **About** (engrenagem ao lado de "About" na página inicial do repositório), coloque o link da loja em **Website**.
 4. Faça o commit e o push (por exemplo "Adiciona o link da Chrome Web Store ao README").
 
