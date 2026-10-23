@@ -1,0 +1,33 @@
+# Publica uma Release com o .zip da extensão sempre que uma tag "v*" é enviada.
+#
+#   1. aumente "version" no manifest.json e faça o commit
+#   2. git tag v0.1.1 && git push origin v0.1.1
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Conferir manifest e versão
+        run: node scripts/verificar-release.js "$GITHUB_REF_NAME"
+
+      # Só o que o navegador precisa: README, scripts e .github ficam de fora.
+      - name: Gerar o .zip da extensão
+        run: zip -r "sigaa-moderno-$GITHUB_REF_NAME.zip" manifest.json src icons -x '*.DS_Store'
+
+      - name: Criar a Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" "sigaa-moderno-$GITHUB_REF_NAME.zip" \
+            --title "SIGAA Moderno $GITHUB_REF_NAME" \
+            --generate-notes

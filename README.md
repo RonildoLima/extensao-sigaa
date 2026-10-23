@@ -24,7 +24,7 @@ O **Alto contraste** do próprio SIGAA tem prioridade: enquanto ele estiver liga
 
 ## Instalação
 
-A extensão ainda não está na Chrome Web Store nem no Edge Add-ons, então a instalação é manual, pelo modo desenvolvedor do navegador ("carregar sem compactação"). Leva uns 2 minutos e **não precisa de Node, npm nem build**: a pasta do projeto já é a extensão pronta.
+A extensão ainda não está na Chrome Web Store nem no Edge Add-ons, então a instalação é manual, pelo modo desenvolvedor do navegador ("carregar sem compactação"). Leva uns 2 minutos e **não precisa de Git, Node, npm nem build**: basta baixar o `.zip` da última versão.
 
 ### Requisitos
 
@@ -34,13 +34,13 @@ A extensão ainda não está na Chrome Web Store nem no Edge Add-ons, então a i
 
 ### Passo a passo
 
-1. **Baixe o projeto**, por uma das opções:
-   - com Git: `git clone https://github.com/RonildoLima/extensao-sigaa.git`;
-   - sem Git: na página do repositório no GitHub, clique em **Code → Download ZIP** e extraia o arquivo.
-2. **Deixe a pasta num lugar fixo** (por exemplo `Documentos\extensao-sigaa`). O navegador lê os arquivos direto dela: se você mover, renomear ou apagar a pasta, a extensão para de funcionar.
+1. **Baixe a extensão**:
+   - **Recomendado:** abra a [última Release](https://github.com/RonildoLima/extensao-sigaa/releases/latest), baixe `sigaa-moderno-vX.Y.Z.zip` em **Assets** e extraia numa pasta (no Windows: botão direito → **Extrair tudo**). O `.zip` já traz só a extensão, pronta para carregar.
+   - Para acompanhar as mudanças do código: `git clone https://github.com/RonildoLima/extensao-sigaa.git`. Nesse caso a própria pasta clonada é a extensão.
+2. **Deixe a pasta num lugar fixo** (por exemplo `Documentos\sigaa-moderno`). O navegador lê os arquivos direto dela: se você mover, renomear ou apagar a pasta, a extensão para de funcionar.
 3. **Abra a página de extensões** digitando na barra de endereço: `chrome://extensions` (Chrome), `edge://extensions` (Edge) ou `brave://extensions` (Brave).
 4. **Ligue o Modo do desenvolvedor**: no Chrome e no Brave fica no canto superior direito; no Edge, no menu lateral esquerdo.
-5. Clique em **Carregar sem compactação** (*Load unpacked*, se o navegador estiver em inglês) e selecione a pasta que **contém o arquivo `manifest.json`**. Se você extraiu o ZIP e a pasta escolhida só tem outra pasta dentro, escolha a de dentro.
+5. Clique em **Carregar sem compactação** (*Load unpacked*, se o navegador estiver em inglês) e selecione a pasta que **contém o arquivo `manifest.json`**. Se a pasta escolhida só tem outra pasta dentro (acontece ao extrair o `.zip` dentro de uma pasta com o mesmo nome), escolha a de dentro.
 6. **SIGAA Moderno (UFCG)** aparece na lista, ligada e sem o botão vermelho **Erros**.
 7. *(Opcional)* Fixe o ícone na barra: clique no ícone de peça de quebra-cabeça e depois no alfinete ao lado de "SIGAA Moderno".
 8. Abra o SIGAA: <https://sigaa.ufcg.edu.br/sigaa/verTelaLogin.do>. Abas do SIGAA que já estavam abertas precisam ser recarregadas (F5), porque o navegador só injeta a extensão ao carregar a página.
@@ -57,8 +57,8 @@ A extensão só atua em `https://sigaa.ufcg.edu.br/*` e `https://sigrh.ufcg.edu.
 
 ### Atualizar
 
-1. Na pasta do projeto, rode `git pull` (ou baixe o ZIP de novo e substitua os arquivos).
-2. Em `chrome://extensions`, clique no botão **Recarregar** (seta circular) no cartão da extensão.
+1. Instalou pela Release: baixe o `.zip` da versão nova e extraia **por cima da pasta atual**, substituindo os arquivos (assim o navegador continua apontando para o mesmo lugar). Instalou com Git: rode `git pull` na pasta.
+2. Em `chrome://extensions`, clique no botão **Recarregar** (seta circular) no cartão da extensão. A versão instalada aparece no cartão e no rodapé do popup.
 3. Recarregue (F5) as abas do SIGAA. Suas preferências são mantidas.
 
 ### Desinstalar
@@ -117,6 +117,14 @@ Não há build: é CSS e JS puros.
 Para iterar no visual sem recarregar a extensão, `scripts/preview.js` injeta os CSS na aba atual e salva capturas nos temas claro e escuro. Foi escrito para o Playwright MCP (`browser_run_code_unsafe` com `filename`) e não faz parte da extensão. Os caminhos `dir` e `out` no topo do arquivo apontam para a máquina de quem o escreveu: ajuste-os para a sua pasta antes de usar.
 
 Para testar de verdade, carregue a pasta em `chrome://extensions` e use **Recarregar** a cada mudança.
+
+### Publicar uma versão
+
+1. Aumente `version` no `manifest.json` (por exemplo para `0.1.1`) e faça o commit.
+2. Crie a tag com o mesmo número e envie: `git tag v0.1.1` e `git push origin v0.1.1`.
+3. O workflow [`release.yml`](.github/workflows/release.yml) roda sozinho: confere o manifest com `scripts/verificar-release.js` (arquivos referenciados existem e a tag bate com a versão), gera `sigaa-moderno-v0.1.1.zip` só com `manifest.json`, `src/` e `icons/`, e cria a Release com as notas geradas dos commits. Acompanhe na aba **Actions** do GitHub.
+
+Para conferir antes de criar a tag: `node scripts/verificar-release.js v0.1.1`. O mesmo `.zip` serve para enviar à Chrome Web Store, se a extensão for publicada lá.
 
 ## Privacidade
 
