@@ -71,7 +71,7 @@ Há duas formas de usar a extensão. Escolha a que combina com você:
 
 ### Opção 1: pela Chrome Web Store
 
-**Link da loja:** [SIGAA Moderno na Chrome Web Store](https://chromewebstore.google.com/detail/sigaa-moderno-ufcg/gmpbhgljjdbimppdologlnfkchldbhkh) (a extensão é **não listada**: não aparece na busca da loja, só por este link).
+**Link da loja:** [SIGAA Moderno na Chrome Web Store](https://chromewebstore.google.com/detail/sigaa-moderno-ufcg/gmpbhgljjdbimppdologlnfkchldbhkh) (ou pesquise por "SIGAA Moderno" na Chrome Web Store).
 
 1. Abra a página da extensão na Chrome Web Store (link acima).
 2. Clique em **Usar no Chrome** (*Add to Chrome*, se estiver em inglês) e confirme.

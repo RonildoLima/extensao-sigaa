@@ -86,7 +86,7 @@ Só funciona se o repositório for **público** (ou hospede o `PRIVACY.md` em ou
 
 ## Aba "Distribution"
 
-- Visibilidade: **Não listada** (só quem tem o link instala). Mude para pública depois, se quiser.
+- Visibilidade: **Pública** (aparece na busca da loja).
 - Países: Brasil, ou todos.
 - Preço: gratuita.
 
@@ -108,7 +108,7 @@ A busca no menu (Ctrl+K) usa o menu do Portal do Discente, que só existe depois
 - [x] Capturas e tile enviados na ordem acima.
 - [x] Textos das abas Privacy e Distribution preenchidos.
 - [x] Enviada para análise.
-- [x] Aprovada e publicada como não listada, com o link no README.
+- [x] Aprovada e publicada, hoje com visibilidade pública, com o link no README.
 
 ## Quando a loja aprovar
 
@@ -116,7 +116,7 @@ A busca no menu (Ctrl+K) usa o menu do Portal do Discente, que só existe depois
 
 A revisão costuma levar de alguns dias a algumas semanas e o resultado chega por e-mail, para o endereço de desenvolvedor da conta. Depois da aprovação você tem **30 dias** para publicar (a menos que tenha marcado a publicação automática).
 
-1. No painel do desenvolvedor, abra a extensão e copie o endereço da página dela, no formato `https://chromewebstore.google.com/detail/<nome>/<id>`. Como a visibilidade é **não listada**, só quem tem esse link instala: ele é o que vai no README.
+1. No painel do desenvolvedor, abra a extensão e copie o endereço da página dela, no formato `https://chromewebstore.google.com/detail/<nome>/<id>`. Use o endereço sem parâmetros como `?authuser=0` ou `?hl=pt-BR` (o primeiro é da sua conta Google): ele é o que vai no README.
 2. No `README.md`, procure a linha **Link da loja** (na "Opção 1") e deixe assim:
 
    ```md
