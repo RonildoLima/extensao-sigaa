@@ -24,19 +24,46 @@ O **Alto contraste** do próprio SIGAA tem prioridade: enquanto ele estiver liga
 
 ## Instalação
 
-A extensão ainda não está na Chrome Web Store nem no Edge Add-ons, então a instalação é manual, pelo modo desenvolvedor do navegador ("carregar sem compactação"). Leva uns 2 minutos e **não precisa de Git, Node, npm nem build**: basta baixar o `.zip` da última versão.
+Há duas formas de usar a extensão. Escolha a que combina com você:
+
+| | **Opção 1: Chrome Web Store** | **Opção 2: baixar e ajustar no seu computador** |
+| --- | --- | --- |
+| Para quem | Quem só quer usar | Quem quer mudar cores, telas ou recursos |
+| Instalação | Um clique | Baixar a pasta e carregar no navegador (uns 2 minutos) |
+| Atualizações | Automáticas | Manuais (baixar de novo ou `git pull`) |
+| Editar o código | Não | Sim: a mudança aparece ao recarregar a extensão |
+
+> Não deixe as duas versões ligadas ao mesmo tempo, senão o visual é aplicado duas vezes. Se for personalizar, desative ou remova a da loja.
 
 ### Requisitos
 
 - Um navegador baseado em Chromium, **versão 123 ou superior**: Google Chrome, Microsoft Edge ou Brave (e similares, como Vivaldi e Opera). Para ver a versão, abra `chrome://version` (ou `edge://version`, `brave://version`). Em versões anteriores o tema não é aplicado direito, porque o CSS usa `light-dark()` e aninhamento.
+- Computador (Windows, macOS ou Linux). O Chrome no celular não tem extensões.
 - Acesso ao SIGAA da UFCG como de costume. A extensão só muda o visual, não faz login por você.
 - Firefox e Safari ainda não são suportados.
 
-### Passo a passo
+### Opção 1: pela Chrome Web Store
 
-1. **Baixe a extensão**:
-   - **Recomendado:** abra a [última Release](https://github.com/RonildoLima/extensao-sigaa/releases/latest), baixe `sigaa-moderno-vX.Y.Z.zip` em **Assets** e extraia numa pasta (no Windows: botão direito → **Extrair tudo**). O `.zip` já traz só a extensão, pronta para carregar.
-   - Para acompanhar as mudanças do código: `git clone https://github.com/RonildoLima/extensao-sigaa.git`. Nesse caso a própria pasta clonada é a extensão.
+**Link da loja:** _em breve_.
+<!-- TODO(loja): quando a Chrome Web Store aprovar a extensão, troque "em breve" pelo link da página dela. -->
+
+1. Abra a página da extensão na Chrome Web Store (link acima).
+2. Clique em **Usar no Chrome** (*Add to Chrome*, se estiver em inglês) e confirme.
+   - No **Edge**, abra o mesmo link: ele aceita extensões da loja do Chrome e, se pedir, permita extensões de outras lojas.
+   - No **Brave**, funciona como no Chrome.
+3. *(Opcional)* Fixe o ícone na barra: clique no ícone de peça de quebra-cabeça e depois no alfinete ao lado de "SIGAA Moderno".
+4. Abra o SIGAA: <https://sigaa.ufcg.edu.br/sigaa/verTelaLogin.do>. Abas do SIGAA que já estavam abertas precisam ser recarregadas (F5).
+
+**Atualizar:** é automático, o navegador instala as versões novas sozinho.
+**Desinstalar:** clique com o botão direito no ícone da extensão e escolha **Remover do Chrome** (ou use o botão **Remover** em `chrome://extensions`).
+
+### Opção 2: baixar e ajustar no seu computador
+
+Aqui você usa a pasta do projeto como extensão, então pode editar os arquivos e ver o resultado. Não precisa de Node, npm nem build.
+
+1. **Baixe o projeto**, por uma das opções:
+   - **Para só instalar:** abra a [última Release](https://github.com/RonildoLima/extensao-sigaa/releases/latest), baixe `sigaa-moderno-vX.Y.Z.zip` em **Assets** e extraia numa pasta (no Windows: botão direito → **Extrair tudo**). O `.zip` já traz só a extensão, pronta para carregar.
+   - **Para personalizar** (recomendado): `git clone https://github.com/RonildoLima/extensao-sigaa.git`. Nesse caso a própria pasta clonada é a extensão, e o Git permite desfazer qualquer mudança.
 2. **Deixe a pasta num lugar fixo** (por exemplo `Documentos\sigaa-moderno`). O navegador lê os arquivos direto dela: se você mover, renomear ou apagar a pasta, a extensão para de funcionar.
 3. **Abra a página de extensões** digitando na barra de endereço: `chrome://extensions` (Chrome), `edge://extensions` (Edge) ou `brave://extensions` (Brave).
 4. **Ligue o Modo do desenvolvedor**: no Chrome e no Brave fica no canto superior direito; no Edge, no menu lateral esquerdo.
@@ -44,6 +71,14 @@ A extensão ainda não está na Chrome Web Store nem no Edge Add-ons, então a i
 6. **SIGAA Moderno (UFCG)** aparece na lista, ligada e sem o botão vermelho **Erros**.
 7. *(Opcional)* Fixe o ícone na barra: clique no ícone de peça de quebra-cabeça e depois no alfinete ao lado de "SIGAA Moderno".
 8. Abra o SIGAA: <https://sigaa.ufcg.edu.br/sigaa/verTelaLogin.do>. Abas do SIGAA que já estavam abertas precisam ser recarregadas (F5), porque o navegador só injeta a extensão ao carregar a página.
+
+**Depois de mudar um arquivo:** em `chrome://extensions`, clique no botão **Recarregar** (seta circular) no cartão da extensão e recarregue (F5) a aba do SIGAA.
+
+**Atualizar:**
+1. Instalou pela Release: baixe o `.zip` da versão nova e extraia **por cima da pasta atual**, substituindo os arquivos (assim o navegador continua apontando para o mesmo lugar). Instalou com Git: rode `git pull` na pasta. Se você mudou arquivos, o `git pull` pode pedir para resolver conflitos; peça ajuda ao seu agente de IA ou guarde as mudanças antes com `git stash`.
+2. Recarregue a extensão e a aba, como acima. A versão instalada aparece no cartão e no rodapé do popup.
+
+**Desinstalar:** em `chrome://extensions`, clique em **Remover** no cartão da extensão. Depois pode apagar a pasta.
 
 ### Conferir se funcionou
 
@@ -55,26 +90,56 @@ A extensão ainda não está na Chrome Web Store nem no Edge Add-ons, então a i
 
 A extensão só atua em `https://sigaa.ufcg.edu.br/*` e `https://sigrh.ufcg.edu.br/cxpostal/*` (Caixa Postal) e pede a permissão `storage` para guardar suas preferências. Não pede acesso a histórico, abas, cookies nem a outros sites. Detalhes em [Privacidade](#privacidade).
 
-### Atualizar
-
-1. Instalou pela Release: baixe o `.zip` da versão nova e extraia **por cima da pasta atual**, substituindo os arquivos (assim o navegador continua apontando para o mesmo lugar). Instalou com Git: rode `git pull` na pasta.
-2. Em `chrome://extensions`, clique no botão **Recarregar** (seta circular) no cartão da extensão. A versão instalada aparece no cartão e no rodapé do popup.
-3. Recarregue (F5) as abas do SIGAA. Suas preferências são mantidas.
-
-### Desinstalar
-
-Em `chrome://extensions`, clique em **Remover** no cartão da extensão. Depois pode apagar a pasta.
-
 ### Problemas comuns
 
 | Sintoma | O que fazer |
 | --- | --- |
 | "Manifest file is missing or unreadable" / "Não foi possível carregar o manifesto" | Você escolheu a pasta errada. Selecione a que tem o `manifest.json` direto dentro dela. |
 | O SIGAA continua com o visual antigo | Recarregue a aba (F5). Confira se a extensão está ligada em `chrome://extensions` e se **Ativar tema** está marcado no popup. Em **Detalhes → Acesso ao site**, não deixe como "Ao clicar" ou restrito a outros sites. Confirme que o navegador é a versão 123 ou mais nova. |
+| Editei um arquivo e nada mudou | O CSS e os scripts só entram quando a página carrega. Clique em **Recarregar** no cartão da extensão em `chrome://extensions` e depois em F5 na aba do SIGAA. |
+| O visual parece aplicado duas vezes | A versão da loja e a pasta local estão ligadas juntas. Desative uma delas em `chrome://extensions`. |
 | O tema some só em algumas telas | O **Alto contraste** do próprio SIGAA está ligado (botão de contraste do cabeçalho) e tem prioridade. Desligue-o para voltar ao tema. |
 | O tema ficou claro (ou escuro) demais | Escolha **Claro** ou **Escuro** no popup, no lugar de Automático. |
 | Ctrl+K não abre a busca | A busca só funciona com o tema ativo: **Ativar tema** marcado no popup e **Alto contraste** do SIGAA desligado. O menu em si só existe depois do login, então no primeiro uso a busca pede para abrir o Portal do Discente uma vez, para copiar os itens. |
-| Apareceu o botão **Erros** no cartão da extensão | Clique nele, copie a mensagem e abra uma issue no GitHub. |
+| Apareceu o botão **Erros** no cartão da extensão | Clique nele, copie a mensagem e abra uma issue no GitHub (ou mostre ao seu agente de IA, que costuma achar a causa). |
+
+## Personalizar com IA
+
+O repositório já vem preparado para agentes de IA (Claude Code, Codex, Cursor, GitHub Copilot e similares). O arquivo [AGENTS.md](AGENTS.md) explica o projeto, em qual arquivo mexer para cada coisa e o que não quebrar. O Claude Code lê o [CLAUDE.md](CLAUDE.md), que aponta para ele.
+
+**Como começar**
+
+1. Baixe o projeto como na [Opção 2](#opção-2-baixar-e-ajustar-no-seu-computador), de preferência com `git clone`, para poder desfazer o que não gostar.
+2. Abra a pasta no seu agente. No Claude Code: `cd extensao-sigaa` e depois `claude`. Nos outros, abra a pasta no editor.
+3. Peça o que quiser:
+   - **Claude Code:** digite `/personalizar`. Ele pergunta o que você quer mudar, ou você já diz: `/personalizar deixe o tema verde`.
+   - **Outros agentes:** cole o prompt abaixo.
+4. Em `chrome://extensions`, clique em **Recarregar** na extensão e dê F5 no SIGAA para ver o resultado.
+5. Gostou? Faça o commit. Não gostou? `git restore .` desfaz tudo que ainda não foi commitado.
+
+**Prompt para colar em qualquer agente**
+
+```text
+Leia o AGENTS.md e o README.md deste projeto. Ele é a extensão de navegador "SIGAA Moderno".
+Quero personalizá-la: [DESCREVA AQUI O QUE VOCÊ QUER MUDAR].
+Se eu ainda não disse o que quero, me pergunte com opções simples, uma pergunta por vez.
+Mude o mínimo necessário, me explique em português simples o que você alterou e me diga
+como recarregar a extensão para eu ver o resultado.
+```
+
+**Exemplos de pedidos**
+
+- "Troque o azul e o laranja por tons de verde."
+- "Aumente a fonte das tabelas de notas."
+- "Deixe o tema escuro mais escuro."
+- "Mude o atalho da busca de Ctrl+K para Ctrl+J."
+- "Esconda a barra de rolagem do menu lateral da Turma Virtual."
+
+**Cuidados**
+
+- O agente não tem o seu login do SIGAA e não deve pedir sua senha. Para ajustar uma tela que só aparece logado, descreva o problema ou envie uma captura **depois de apagar nome, matrícula e qualquer dado pessoal**.
+- Não envie nem commite capturas com dados pessoais.
+- Mudanças que fazem a extensão ler outros dados, acessar outros sites ou fazer requisições de rede mudam a política de privacidade ([PRIVACY.md](PRIVACY.md)). O `AGENTS.md` manda o agente avisar você antes.
 
 ## Como funciona
 
@@ -112,7 +177,7 @@ Todas as regras ficam dentro de `html[data-sg="on"]:not(.contrast) { ... }` (CSS
 
 ## Desenvolvimento
 
-Não há build: é CSS e JS puros.
+Não há build: é CSS e JS puros. Quem trabalha com um agente de IA encontra o roteiro de contribuição (mapa de arquivos, regras do código, como testar) no [AGENTS.md](AGENTS.md), e a seção [Personalizar com IA](#personalizar-com-ia) explica como começar.
 
 Para iterar no visual sem recarregar a extensão, `scripts/preview.js` injeta os CSS na aba atual e salva capturas nos temas claro e escuro. Foi escrito para o Playwright MCP (`browser_run_code_unsafe` com `filename`) e não faz parte da extensão. Os caminhos `dir` e `out` no topo do arquivo apontam para a máquina de quem o escreveu: ajuste-os para a sua pasta antes de usar.
 
@@ -142,4 +207,8 @@ A política completa está em [PRIVACY.md](PRIVACY.md). Em resumo, nenhum dado �
 - Turmas: filtro por texto e períodos recolhíveis.
 - Aviso antes de a sessão expirar.
 - Portal público com tema escuro próprio (hoje o cartão fica sempre claro).
-- Publicação na Chrome Web Store / Edge Add-ons e suporte a Firefox.
+- Publicação no Edge Add-ons e suporte a Firefox.
+
+## Licença
+
+Código sob a [licença MIT](LICENSE): você pode usar, copiar, modificar e redistribuir, inclusive com mudanças suas, mantendo o aviso de direitos autorais. A licença cobre só o código desta extensão. SIGAA, UFCG e UFRN pertencem aos seus respectivos donos, e este projeto não tem vínculo oficial com eles.
