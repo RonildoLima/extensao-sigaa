@@ -73,10 +73,11 @@ Aplicar CSS e scripts de interface (tema, busca no menu e ajustes de layout) som
 
 **Código remoto:** Não. Todo o código está no pacote; nenhuma requisição de rede é feita pela extensão.
 
-**Uso de dados:** a extensão não envia nada para fora do navegador. Leia a definição de cada tipo na tela antes de marcar:
+**Uso de dados** ("Quais dados você pretende coletar dos usuários agora ou no futuro?"): marque **só "Conteúdo do site"** e deixe os outros oito desmarcados.
 
-- Se o formulário considera "coletar" apenas o que sai do dispositivo: não marque nenhum tipo.
-- Se ele também conta o que é guardado localmente: marque só **Conteúdo do site** (rótulos do menu, guardados no navegador), finalidade "funcionalidade da extensão", sem compartilhamento nem venda.
+Por quê: a FAQ da loja diz que "tratar" dados inclui coletar, transmitir, usar ou compartilhar, e que isso deve ser declarado "mesmo quando os dados são processados ou guardados localmente". A extensão lê texto da página (os rótulos do menu, que ficam em cache no navegador, e os dados da turma e o nome exibido, usados só para montar a faixa da turma e as iniciais do avatar). Nada disso sai do navegador, e o `PRIVACY.md` já descreve exatamente isso.
+
+Os outros tipos não se aplicam: a extensão não lê usuário nem senha (autenticação), mensagens (comunicações pessoais), localização, histórico de navegação, nem cliques ou teclas (atividade do usuário). O nome só aparece na tela para formar as iniciais e não é guardado; se preferir a máxima cautela, pode marcar também "Informações de identificação pessoal", sabendo que a página pública da extensão passará a exibir isso.
 
 **Certificações** (as três são verdadeiras para esta extensão): não vende nem transfere dados a terceiros fora dos usos aprovados; não usa dados para fins alheios ao propósito único; não usa dados para avaliar crédito ou empréstimo.
 
