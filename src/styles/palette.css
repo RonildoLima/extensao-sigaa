@@ -1,0 +1,267 @@
+/*
+ * Busca no menu (Ctrl+K): paleta em <dialog> modal e o botão "Buscar" do
+ * painel do usuário. O comportamento está em src/content/palette.js.
+ *
+ * O <dialog> usa a camada superior do navegador, então fica acima de qualquer
+ * z-index do SIGAA. Os seletores com #id vencem as regras genéricas de
+ * input/ul/li do tema e do SIGAA.
+ */
+
+/* O botão é parte do tema: com o tema desligado (ou Alto contraste) não aparece. */
+li.sg-busca {
+  display: none !important;
+}
+
+html[data-sg="on"]:not(.contrast) {
+  & #container #painel-usuario #menu-usuario li.sg-busca {
+    display: block !important;
+  }
+
+  & #container #painel-usuario #menu-usuario li.sg-busca a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    text-indent: 0;
+  }
+
+  & #container #painel-usuario #menu-usuario li.sg-busca a::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    width: 15px;
+    height: 15px;
+    margin-top: -7.5px;
+    background: currentColor;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+
+  & li.sg-busca kbd,
+  & #sg-palette kbd {
+    display: inline-block;
+    min-width: 18px;
+    margin: 0 2px;
+    padding: 0 5px;
+    border: 1px solid var(--sg-border-strong);
+    border-bottom-width: 2px;
+    border-radius: 5px;
+    background: var(--sg-surface-2);
+    color: var(--sg-text-muted);
+    font: 600 10.5px/16px var(--sg-font);
+    text-align: center;
+  }
+
+  /* ---------- Paleta ---------- */
+  & dialog#sg-palette {
+    box-sizing: border-box;
+    width: min(640px, calc(100vw - 32px));
+    max-height: min(560px, 78vh);
+    margin: 11vh auto auto;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius-lg);
+    background: var(--sg-surface);
+    color: var(--sg-text);
+    box-shadow: var(--sg-shadow-lg);
+    font-family: var(--sg-font);
+    font-size: var(--sg-font-size);
+    line-height: 1.4;
+    text-align: left;
+  }
+
+  & dialog#sg-palette[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  & dialog#sg-palette::backdrop {
+    background: rgb(6 9 20 / 0.55);
+    backdrop-filter: blur(2px);
+  }
+
+  & #sg-palette .sg-pal-field {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--sg-border);
+  }
+
+  & #sg-palette .sg-pal-icon {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: var(--sg-text-muted);
+    stroke-width: 2.2;
+    stroke-linecap: round;
+  }
+
+  & #sg-palette #sg-pal-input,
+  & #sg-palette #sg-pal-input:hover,
+  & #sg-palette #sg-pal-input:focus {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    padding: 4px 0;
+    border: 0;
+    border-radius: 0;
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+    color: var(--sg-text);
+    font-size: 15px;
+  }
+
+  & #sg-palette #sg-pal-input::placeholder {
+    color: var(--sg-text-muted);
+    opacity: 1;
+  }
+
+  /* ---------- Lista ---------- */
+  & #sg-palette #sg-pal-list {
+    flex: 1 1 auto;
+    min-height: 0;
+    margin: 0;
+    padding: 6px;
+    overflow-y: auto;
+    list-style: none;
+  }
+
+  & #sg-palette #sg-pal-list:empty {
+    display: none;
+  }
+
+  & #sg-palette .sg-pal-group {
+    margin: 0;
+    padding: 10px 10px 4px;
+    color: var(--sg-text-muted);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    list-style: none;
+    text-transform: uppercase;
+  }
+
+  & #sg-palette .sg-pal-opt {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin: 0;
+    padding: 7px 10px;
+    border-radius: 8px;
+    color: var(--sg-text);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  & #sg-palette .sg-pal-opt[aria-selected="true"] {
+    background: var(--sg-brand-soft);
+    box-shadow: inset 3px 0 0 var(--sg-brand);
+  }
+
+  & #sg-palette .sg-pal-name {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* Itens que abrem em outra aba levam um ↗ depois do nome. */
+  & #sg-palette .sg-pal-opt[data-external] .sg-pal-name::after {
+    content: " ↗";
+    color: var(--sg-text-muted);
+    font-weight: 400;
+  }
+
+  & #sg-palette mark {
+    background: none;
+    box-shadow: inset 0 -2px 0 var(--sg-accent);
+    color: var(--sg-heading);
+    font-weight: 800;
+  }
+
+  & #sg-palette .sg-pal-trail {
+    color: var(--sg-text-muted);
+    font-size: 12px;
+  }
+
+  /* ---------- Avisos e rodapé ---------- */
+  & #sg-palette .sg-pal-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 22px 20px;
+    color: var(--sg-text-muted);
+    font-size: 14px;
+  }
+
+  & #sg-palette .sg-pal-empty[hidden] {
+    display: none;
+  }
+
+  & #sg-palette .sg-pal-empty a {
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: var(--sg-brand);
+    color: var(--sg-on-brand);
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  & #sg-palette .sg-pal-empty a:hover {
+    background: var(--sg-brand-strong);
+    color: var(--sg-on-brand);
+    text-decoration: none;
+  }
+
+  & #sg-palette .sg-pal-foot {
+    display: flex;
+    flex: none;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 16px;
+    padding: 8px 16px;
+    border-top: 1px solid var(--sg-border);
+    background: var(--sg-surface-2);
+    color: var(--sg-text-muted);
+    font-size: 12px;
+  }
+
+  & #sg-palette .sg-pal-note {
+    margin-left: auto;
+  }
+
+  /* Só para leitores de tela (contagem de resultados) */
+  & #sg-palette .sg-pal-announcer {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* Em telas de toque não há setas nem Enter para ensinar */
+@media (hover: none) {
+  html[data-sg="on"]:not(.contrast) #sg-palette .sg-pal-foot {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html[data-sg="on"]:not(.contrast) dialog#sg-palette[open] {
+    animation: sg-pal-in 140ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+}
+
+@keyframes sg-pal-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+}

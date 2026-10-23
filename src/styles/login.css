@@ -1,0 +1,178 @@
+/*
+ * Tela de login (/sigaa/verTelaLogin.do): reconhecida por form[name="loginForm"].
+ * O formulário, os names dos campos e o onclick do botão ficam intactos para o
+ * preenchimento automático do navegador continuar funcionando.
+ *
+ * Vários blocos da tela usam style="" inline (largura do cartão, fundo do
+ * aviso), por isso alguns !important aqui.
+ */
+html[data-sg="on"]:not(.contrast) {
+  /* A tela de login tem um #painel-usuario vazio (sem usuário logado) */
+  & body:has(form[name="loginForm"]) #container #painel-usuario {
+    display: none;
+  }
+
+  & body:has(form[name="loginForm"]) #container {
+    max-width: 960px;
+  }
+
+  /*
+   * #conteudo vira uma coluna para o cartão de login subir para o topo (no
+   * HTML ele vem depois dos blocos de sistemas e de recuperação de senha).
+   * Os <br> do layout antigo somem para o espaçamento ficar por conta do CSS.
+   */
+  & body:has(form[name="loginForm"]) #conteudo {
+    display: flex;
+    flex-direction: column;
+    padding: 32px 28px 28px;
+  }
+
+  & body:has(form[name="loginForm"]) #conteudo > :is(br, .clear, center:empty) {
+    display: none;
+  }
+
+  & body:has(form[name="loginForm"]) #conteudo > .logon {
+    order: 1;
+    align-self: center;
+  }
+
+  /* Aviso "ATENÇÃO!" sobre maiúsculas na senha */
+  & body:has(form[name="loginForm"]) #conteudo > div[align="center"][style*="EFF3FA"] {
+    order: 2;
+    box-sizing: border-box;
+    width: min(420px, 100%);
+    align-self: center;
+    margin: 16px 0 0 !important;
+    padding: 12px 18px !important;
+    background: var(--sg-warning-bg) !important;
+    border: 1px solid var(--sg-border);
+    border-left: 4px solid var(--sg-accent);
+    border-radius: var(--sg-radius);
+    color: var(--sg-text);
+    font-size: 0.95em;
+  }
+
+  & body:has(form[name="loginForm"]) #conteudo > div[align="center"][style*="EFF3FA"] p {
+    color: var(--sg-text) !important;
+    width: auto !important;
+  }
+
+  & body:has(form[name="loginForm"]) #conteudo > div[align="center"][style*="EFF3FA"] p:first-child {
+    color: var(--sg-danger) !important;
+  }
+
+  /* Outros sistemas */
+  & body:has(form[name="loginForm"]) #conteudo > div[align="center"][style*="width: 100%"] {
+    order: 3;
+    margin-top: 32px !important;
+  }
+
+  & body:has(form[name="loginForm"]) #conteudo > div[align="center"][style*="width: 100%"]::before {
+    content: "Acessar outro sistema";
+    display: block;
+    margin-bottom: 4px;
+    color: var(--sg-text-muted);
+    font-size: 0.9em;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  & body:has(form[name="loginForm"]) #conteudo > div[style*="645px"] {
+    order: 4;
+    width: auto !important;
+    margin-top: 12px !important;
+  }
+
+  & body:has(form[name="loginForm"]) #conteudo > table {
+    order: 5;
+    margin-top: 12px;
+  }
+
+  /* Seletor de sistemas (SIGAA, SIPAC, SIGRH...) */
+  & td.painel {
+    padding: 12px 8px;
+    background: var(--sg-surface-2);
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius);
+    color: var(--sg-text-muted);
+    transition: border-color var(--sg-ease), box-shadow var(--sg-ease), transform var(--sg-ease);
+  }
+
+  & td.painel:hover {
+    border-color: var(--sg-brand);
+    box-shadow: var(--sg-shadow-md);
+    transform: translateY(-1px);
+  }
+
+  & td.painel.sistemaAtual {
+    background: var(--sg-brand-soft);
+    border-color: var(--sg-brand);
+  }
+
+  /* Cartão de login */
+  & .logon {
+    box-sizing: border-box;
+    width: min(420px, 100%) !important;
+    margin: 12px auto 0 !important;
+    background: var(--sg-surface);
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius-lg);
+    box-shadow: var(--sg-shadow-lg);
+    overflow: hidden;
+  }
+
+  & .logon h3 {
+    box-sizing: border-box;
+    width: auto;
+    margin: 0;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, var(--sg-header-from), var(--sg-header-to));
+    border: 0;
+    color: #ffffff;
+    font-size: 1.15em;
+    font-weight: 700;
+    text-align: left;
+  }
+
+  & .logon form {
+    padding: 8px 24px 22px;
+  }
+
+  & .logon table {
+    background: transparent;
+    border: 0;
+  }
+
+  & .logon table th {
+    padding: 12px 8px 4px 0;
+    color: var(--sg-text-muted);
+    font-size: 0.95em;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  & .logon table td {
+    padding: 6px 0;
+  }
+
+  & .logon input[type="text"],
+  & .logon input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1.08em;
+  }
+
+  & .logon input[type="submit"] {
+    width: 100%;
+    margin: 10px 0 0;
+    padding: 12px 16px;
+    font-size: 1.1em;
+  }
+
+  /* Links de recuperação e "Cadastre-se" */
+  & #conteudo center {
+    color: var(--sg-text-muted);
+    line-height: 1.9;
+  }
+}

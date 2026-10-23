@@ -1,0 +1,66 @@
+{
+  "manifest_version": 3,
+  "name": "SIGAA Moderno (UFCG)",
+  "short_name": "SIGAA Moderno",
+  "version": "0.1.0",
+  "description": "Visual moderno para o SIGAA da UFCG: tema claro e escuro, tabelas e formulários mais legíveis, sem alterar nenhum dado.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "SIGAA Moderno",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://sigaa.ufcg.edu.br/*",
+        "https://sigrh.ufcg.edu.br/cxpostal/*"
+      ],
+      "css": [
+        "src/styles/tokens.css",
+        "src/styles/base.css",
+        "src/styles/shell.css",
+        "src/styles/tables.css",
+        "src/styles/forms.css",
+        "src/styles/messages.css",
+        "src/styles/portal.css",
+        "src/styles/caixa-postal.css",
+        "src/styles/turma-virtual.css",
+        "src/styles/turma-header.css",
+        "src/styles/turma-mobile.css",
+        "src/styles/reports.css",
+        "src/styles/public.css",
+        "src/styles/login.css",
+        "src/styles/palette.css"
+      ],
+      "js": ["src/content/early.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://sigaa.ufcg.edu.br/*"],
+      "js": ["src/content/menu-bridge.js"],
+      "world": "MAIN",
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://sigaa.ufcg.edu.br/*"],
+      "js": ["src/content/turma-layout.js"],
+      "world": "MAIN",
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://sigaa.ufcg.edu.br/*"],
+      "js": ["src/content/palette.js", "src/content/turma.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

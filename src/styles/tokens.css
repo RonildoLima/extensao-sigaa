@@ -1,0 +1,73 @@
+/*
+ * Tokens de design do SIGAA Moderno.
+ *
+ * Tema claro/escuro com light-dark(): o valor certo é escolhido pelo
+ * color-scheme do <html>, que o popup controla via data-sg-theme.
+ * Mantém a família de cores do SIGAA (azul-marinho #404E82 e laranja #D99C44)
+ * para a identidade continuar reconhecível.
+ */
+html[data-sg="on"] {
+  color-scheme: light dark;
+
+  --sg-font: "Inter", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --sg-font-size: 13px;
+  --sg-max-width: 1280px;
+
+  --sg-radius-sm: 6px;
+  --sg-radius: 10px;
+  --sg-radius-lg: 14px;
+  --sg-ease: 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Superfícies */
+  --sg-bg: light-dark(#eef1f8, #0d1120);
+  --sg-surface: light-dark(#ffffff, #151b2f);
+  --sg-surface-2: light-dark(#f6f8fc, #1a2138);
+  --sg-surface-3: light-dark(#e9edf7, #232c4b);
+  --sg-hover: light-dark(#eef2fb, #202a49);
+
+  /* Bordas */
+  --sg-border: light-dark(#dde3f0, #28325a);
+  --sg-border-soft: light-dark(#e8ecf5, #212a4d);
+  --sg-border-strong: light-dark(#c3cce3, #3a4672);
+
+  /* Texto */
+  --sg-text: light-dark(#1a2138, #e6e9f5);
+  --sg-text-muted: light-dark(#5a6482, #98a3c6);
+  --sg-heading: light-dark(#2b3766, #c9d3ff);
+  --sg-link: light-dark(#1f4fbf, #8fa6ff);
+  --sg-link-hover: light-dark(#14388a, #b6c4ff);
+
+  /* Marca */
+  --sg-brand: light-dark(#404e82, #4f63c4);
+  --sg-brand-strong: light-dark(#2f3b69, #6377d8);
+  --sg-brand-soft: light-dark(#e6ebf8, #212b57);
+  --sg-on-brand: #ffffff;
+  --sg-accent: light-dark(#d99c44, #e3ab5a);
+  --sg-header-from: light-dark(#4a5a96, #28336a);
+  --sg-header-to: light-dark(#2f3b69, #1b2349);
+  --sg-focus: light-dark(rgb(64 78 130 / 0.28), rgb(143 166 255 / 0.35));
+
+  /* Semânticas */
+  --sg-info: light-dark(#1d5fb4, #8ab4ff);
+  --sg-info-bg: light-dark(#e7f0fc, #16264a);
+  --sg-success: light-dark(#137a3f, #6fd69a);
+  --sg-success-bg: light-dark(#e4f6ec, #11291f);
+  --sg-warning: light-dark(#8a5a00, #f0c36b);
+  --sg-warning-bg: light-dark(#fff4d6, #302510);
+  --sg-danger: light-dark(#c0262d, #ff8a90);
+  --sg-danger-bg: light-dark(#fde8e9, #321519);
+
+  /* Sombras */
+  --sg-shadow-sm: 0 1px 2px light-dark(rgb(16 24 40 / 0.06), rgb(0 0 0 / 0.35));
+  --sg-shadow-md: 0 4px 14px light-dark(rgb(16 24 40 / 0.1), rgb(0 0 0 / 0.45));
+  --sg-shadow-lg: 0 16px 40px light-dark(rgb(16 24 40 / 0.18), rgb(0 0 0 / 0.6));
+}
+
+/* O early.js resolve "auto" para light/dark em data-sg-scheme. */
+html[data-sg="on"][data-sg-scheme="light"] {
+  color-scheme: light;
+}
+
+html[data-sg="on"][data-sg-scheme="dark"] {
+  color-scheme: dark;
+}

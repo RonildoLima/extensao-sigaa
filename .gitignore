@@ -1,0 +1,11 @@
+# Dependências e build
+node_modules/
+dist/
+*.zip
+
+# Capturas e logs do Playwright MCP (podem conter dados pessoais)
+.playwright-mcp/
+
+# Sistema
+Thumbs.db
+.DS_Store

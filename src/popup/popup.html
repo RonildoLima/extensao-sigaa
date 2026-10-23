@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SIGAA Moderno</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="topo">
+      <img class="logo" src="../../icons/icon48.png" alt="" width="40" height="40" />
+      <div>
+        <h1>SIGAA Moderno</h1>
+        <p class="sub">Visual novo para o SIGAA da UFCG</p>
+      </div>
+    </header>
+
+    <main>
+      <label class="linha" for="enabled">
+        <span class="texto">
+          <strong>Ativar tema</strong>
+          <small>Desligado, o SIGAA volta ao visual original.</small>
+        </span>
+        <input class="switch" id="enabled" type="checkbox" role="switch" />
+      </label>
+
+      <fieldset id="temas">
+        <legend>Aparência</legend>
+        <div class="segmentos">
+          <label>
+            <input type="radio" name="theme" value="auto" />
+            <span>Automático</span>
+          </label>
+          <label>
+            <input type="radio" name="theme" value="light" />
+            <span>Claro</span>
+          </label>
+          <label>
+            <input type="radio" name="theme" value="dark" />
+            <span>Escuro</span>
+          </label>
+        </div>
+        <p class="dica">Automático acompanha o tema do seu sistema.</p>
+      </fieldset>
+    </main>
+
+    <footer>
+      <p>
+        O <em>Alto contraste</em> do próprio SIGAA tem prioridade e desliga o
+        tema enquanto estiver ativo.
+      </p>
+      <p class="versao" id="versao"></p>
+    </footer>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

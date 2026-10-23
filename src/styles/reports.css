@@ -1,0 +1,228 @@
+/*
+ * Relatórios e documentos (Minhas Notas, Índices, Histórico, Atestados...).
+ * Têm um shell próprio, sem #conteudo: #relatorio-container (retrato) ou
+ * #relatorio-paisagem-container (paisagem), com CSS em ufrn_relatorio.css.
+ *
+ * São páginas pensadas para imprimir; o @media print do sistema continua
+ * valendo, e aqui o objetivo é só deixar a leitura em tela confortável.
+ */
+html[data-sg="on"]:not(.contrast) {
+  & #relatorio-container,
+  & #relatorio-paisagem-container {
+    box-sizing: border-box;
+    width: auto;
+    max-width: 960px;
+    margin: 24px auto;
+    background: var(--sg-surface);
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius-lg);
+    box-shadow: var(--sg-shadow-md);
+    color: var(--sg-text);
+    overflow: hidden;
+  }
+
+  & #relatorio-paisagem-container {
+    max-width: 1280px;
+  }
+
+  /* ---------- Cabeçalho do documento ---------- */
+  & #relatorio-cabecalho {
+    padding: 14px 20px;
+    border: 0;
+    border-bottom: 1px solid var(--sg-border);
+    background: var(--sg-surface-2);
+    color: var(--sg-text);
+  }
+
+  & #relatorio-cabecalho #texto {
+    color: var(--sg-heading);
+    font-variant: normal;
+  }
+
+  /* Logotipos têm fundo transparente e texto escuro: ganham um "selo" claro */
+  & #relatorio-cabecalho img {
+    padding: 4px 8px;
+    border-radius: var(--sg-radius-sm);
+    background: #ffffff;
+  }
+
+  & #relatorio-cabecalho #ufrn a {
+    font-size: 0.95em;
+  }
+
+  /* ---------- Corpo ---------- */
+  & #relatorio {
+    padding: 8px 24px 16px;
+    color: var(--sg-text);
+  }
+
+  & #relatorio h2,
+  & #relatorio h2.title,
+  & #relatorio h3 {
+    margin: 18px 0 14px;
+    padding: 0 0 10px;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--sg-border);
+    color: var(--sg-heading);
+    font-size: 1.2em;
+    font-variant: normal;
+    text-align: center;
+  }
+
+  & #relatorio table#identificacao {
+    margin: 12px 0;
+    padding: 12px 16px;
+    background: var(--sg-surface-2);
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius);
+    border-collapse: separate;
+  }
+
+  & #relatorio table#identificacao th {
+    color: var(--sg-text-muted);
+    font-weight: 600;
+  }
+
+  & #relatorio thead td {
+    background: transparent;
+  }
+
+  /* ---------- Tabelas do relatório ---------- */
+  & #relatorio table.tabelaRelatorio,
+  & #relatorio table.tabelaRelatorioBorda {
+    width: 100%;
+    margin: 14px 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--sg-surface);
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius);
+    overflow: hidden;
+  }
+
+  & #relatorio table.tabelaRelatorio caption,
+  & #relatorio table.tabelaRelatorioBorda caption {
+    margin: 0;
+    padding: 9px 16px;
+    background: linear-gradient(135deg, var(--sg-header-from), var(--sg-header-to));
+    border: 0;
+    color: #ffffff;
+    font-size: 1.05em;
+    font-variant: normal;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-align: left;
+  }
+
+  & #relatorio table.tabelaRelatorio thead th,
+  & #relatorio table.tabelaRelatorio thead td,
+  & #relatorio table.tabelaRelatorioBorda thead th {
+    padding: 8px 10px;
+    background: var(--sg-surface-2);
+    border: 0;
+    border-bottom: 1px solid var(--sg-border);
+    color: var(--sg-text-muted);
+    font-size: 0.92em;
+    font-weight: 700;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  & #relatorio table.tabelaRelatorio thead th.nota,
+  & #relatorio table.tabelaRelatorio thead th.situacao {
+    text-align: center;
+  }
+
+  & #relatorio table.tabelaRelatorio tbody td,
+  & #relatorio table.tabelaRelatorio tbody th,
+  & #relatorio table.tabelaRelatorioBorda tbody td {
+    padding: 7px 10px;
+    border: 0;
+    border-bottom: 1px solid var(--sg-border-soft);
+  }
+
+  /*
+   * Colunas de unidade/nota: o sistema fixa border-right inline (#888) e
+   * nowrap no cabeçalho, deixando a tabela mais larga que o documento.
+   */
+  & #relatorio table.tabelaRelatorio :is(th, td).nota {
+    padding-left: 6px;
+    padding-right: 6px;
+    border-right: 1px solid var(--sg-border-soft) !important;
+  }
+
+  & #relatorio table.tabelaRelatorio thead th.nota {
+    width: 1%;
+    line-height: 1.25;
+    text-align: center;
+    white-space: normal;
+  }
+
+  /* Bordas coloridas por style="" inline (#888) nas demais células */
+  & #relatorio table.tabelaRelatorio td[style*="border"] {
+    border-color: var(--sg-border-soft) !important;
+  }
+
+  & #relatorio div.notas {
+    overflow-x: auto;
+  }
+
+  /* Nome da disciplina pode quebrar linha para a tabela caber no documento */
+  & #relatorio table.tabelaRelatorio tbody td:nth-child(2) {
+    white-space: normal;
+  }
+
+  /* Notas: da 3ª coluna em diante os valores ficam centralizados */
+  & #relatorio table.tabelaRelatorio tbody td:nth-child(n + 3) {
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  & #relatorio table.tabelaRelatorio tr.linhaPar td,
+  & #relatorio table.tabelaRelatorio tr.linhaParRelatorio td {
+    background: var(--sg-surface);
+  }
+
+  & #relatorio table.tabelaRelatorio tr.linhaImpar td,
+  & #relatorio table.tabelaRelatorio tr.linhaImparRelatorio td {
+    background: var(--sg-surface-2);
+  }
+
+  & #relatorio table.tabelaRelatorio tbody tr:hover td {
+    background: var(--sg-hover);
+  }
+
+  & #relatorio table.tabelaRelatorio tbody tr.destaque,
+  & #relatorio table.tabelaRelatorio tbody tr.destaque td {
+    background: var(--sg-brand-soft);
+    border-top: 0;
+    color: var(--sg-heading);
+    font-variant: normal;
+  }
+
+  & #relatorio table.tabelaRelatorio tfoot td {
+    background: var(--sg-surface-2);
+  }
+
+  /* Imagens de gráfico (JFreeChart) vêm com fundo branco */
+  & #relatorio img[src*="chart"],
+  & #relatorio img[src*="grafico"] {
+    border-radius: var(--sg-radius-sm);
+    background: #ffffff;
+  }
+
+  /* ---------- Rodapé do documento (Voltar / Imprimir) ---------- */
+  & #relatorio-rodape {
+    margin-top: 8px;
+    padding: 8px 16px;
+    border: 0;
+    border-top: 1px solid var(--sg-border);
+    background: var(--sg-surface-2);
+    color: var(--sg-text-muted);
+  }
+
+  & #relatorio-rodape p {
+    color: var(--sg-text-muted);
+  }
+}

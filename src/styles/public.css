@@ -1,0 +1,75 @@
+/*
+ * Portal público (/sigaa/public/*): shell diferente do restante do sistema,
+ * com cabeçalho em imagens, menu lateral e rodapé. CSS do sistema em
+ * /shared/css/public.css e /sigaa/public/css/public.css.
+ */
+html[data-sg="on"]:not(.contrast) {
+  & body:has(#container-inner) {
+    background: var(--sg-bg);
+  }
+
+  /*
+   * O portal público é montado com imagens de fundo claras (menu, painéis).
+   * Até ele ganhar um tema escuro próprio, o cartão fica sempre claro e só a
+   * página ao redor acompanha o tema.
+   */
+  & #container-inner {
+    color-scheme: light;
+    overflow: hidden;
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius-lg);
+    box-shadow: var(--sg-shadow-md);
+  }
+
+  & body:has(#container-inner) #container {
+    width: auto;
+    max-width: 1000px;
+    margin: 20px auto;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  & #container-inner #corpo {
+    background: var(--sg-surface);
+    color: var(--sg-text);
+  }
+
+  & #container-inner #menu {
+    background-color: var(--sg-surface);
+    background-image: none;
+  }
+
+  & #container-inner h2 {
+    margin: 0 15px 10px;
+    padding: 10px 14px;
+    border-radius: var(--sg-radius-sm);
+    background: var(--sg-surface-2);
+    border-bottom: 1px solid var(--sg-border);
+    color: var(--sg-accent);
+    font-style: normal;
+    font-variant: normal;
+  }
+
+  & #container-inner h2 a:link,
+  & #container-inner h2 a:visited {
+    color: var(--sg-accent);
+  }
+
+  & #container-inner #noticias h3 {
+    color: var(--sg-heading);
+    border-bottom-color: var(--sg-accent);
+  }
+
+  & #container-inner #rodape {
+    border-top: 3px solid var(--sg-accent);
+    background: linear-gradient(135deg, var(--sg-header-from), var(--sg-header-to));
+  }
+
+  & #container-inner #rodape p,
+  & #container-inner #rodape a:link,
+  & #container-inner #rodape a:visited {
+    color: #ffffff;
+  }
+}

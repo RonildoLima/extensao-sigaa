@@ -1,0 +1,463 @@
+/*
+ * Turma Virtual: barra superior (#cabecalho), em duas faixas.
+ *
+ *   1. barra do sistema (azul): marca, busca, sessão e SAIR;
+ *   2. faixa da turma: código e nome da turma, usuário e botões de ação.
+ *
+ * O painel norte tem altura fixa no JS da turma (`north: { size: 48 }`). Para
+ * ele crescer, o turma-layout.js (mundo MAIN) lê --sg-turma-header-h e pede ao
+ * jQuery layout essa altura; os outros painéis se reposicionam sozinhos. O
+ * valor tem que bater com a soma das duas faixas (34px + 54px).
+ *
+ * Quase tudo aqui tem estilo inline (posição absoluta, fontes em pt, bordas e
+ * larguras dos botões): !important é a única forma de trocá-los.
+ * O layout de celular (até 900px) está em turma-mobile.css.
+ */
+html[data-sg="on"]:not(.contrast) {
+  --sg-turma-header-h: 88px;
+
+  & #baseLayout #cabecalho {
+    border: 0;
+    background: var(--sg-surface);
+  }
+
+  /* ---------- 1. Barra do sistema ---------- */
+  & #baseLayout #info-sistema {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    height: 34px;
+    padding: 0 16px;
+  }
+
+  & #baseLayout #info-sistema h1 {
+    margin: 0;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+
+  & #baseLayout #info-sistema h3 {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  & #baseLayout #info-sistema div.dir {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: auto;
+    height: auto;
+    margin: 0 0 0 auto;
+    padding: 0;
+  }
+
+  & #baseLayout #info-sistema .ajuda-link {
+    position: static !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  & #baseLayout #info-sistema .ajuda-link a {
+    padding: 0 !important;
+    border: 0 !important;
+    font-size: 13px;
+    font-weight: 600 !important;
+  }
+
+  & #baseLayout #info-sistema span.relogioAva {
+    padding: 0;
+    border: 0;
+    color: rgb(255 255 255 / 0.85);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  & #baseLayout #info-sistema #tempoSessao {
+    position: static;
+    padding: 3px 12px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.14);
+    font-size: 12.5px;
+    line-height: 1.3;
+  }
+
+  & #baseLayout #info-sistema #tempoSessao :is(small, em) {
+    font-size: inherit;
+    font-style: normal;
+  }
+
+  & #baseLayout #info-sistema #tempoSessao em {
+    opacity: 0.85;
+  }
+
+  & #baseLayout #info-sistema span.sair-sistema {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  & #baseLayout #info-sistema span.sair-sistema a:link,
+  & #baseLayout #info-sistema span.sair-sistema a:visited {
+    display: inline-block;
+    padding: 3px 14px;
+    border: 1px solid rgb(255 255 255 / 0.5);
+    border-radius: 999px;
+    color: #ffffff;
+    font-size: 12.5px;
+    font-weight: 700;
+    line-height: 1.3;
+    transition: background var(--sg-ease), color var(--sg-ease);
+  }
+
+  & #baseLayout #info-sistema span.sair-sistema a:hover {
+    background: #ffffff;
+    color: var(--sg-header-to);
+  }
+
+  /* Botão "Buscar" (criado pelo turma.js): abre a busca Ctrl+K */
+  & #baseLayout #info-sistema .sg-bar-search {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 26px;
+    margin: 0;
+    padding: 0 8px 0 10px;
+    border: 1px solid rgb(255 255 255 / 0.35);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.1);
+    color: #ffffff;
+    font: 600 12.5px/1 var(--sg-font);
+    cursor: pointer;
+    transition: background var(--sg-ease), border-color var(--sg-ease);
+  }
+
+  & #baseLayout #info-sistema .sg-bar-search:hover {
+    border-color: rgb(255 255 255 / 0.7);
+    background: rgb(255 255 255 / 0.2);
+  }
+
+  & #baseLayout #info-sistema .sg-bar-search svg {
+    flex: none;
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+  }
+
+  & #baseLayout #info-sistema .sg-bar-search kbd {
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: rgb(255 255 255 / 0.16);
+    font: 600 10.5px/1 var(--sg-font);
+  }
+
+  /* Botão do menu lateral: só existe no celular */
+  & #baseLayout #info-sistema .sg-nav-toggle {
+    display: none;
+  }
+
+  /* ---------- 2. Faixa da turma ---------- */
+  & #baseLayout #cabecalho > div:not(#info-sistema) {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-sizing: border-box;
+    height: 54px;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--sg-border);
+    background: linear-gradient(90deg, var(--sg-brand-soft), var(--sg-surface) 60%);
+  }
+
+  /* Código e nome da turma (o turma.js monta o .sg-turma; sem ele fica o original) */
+  & #baseLayout #nomeTurma {
+    order: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-top: 0 !important;
+    overflow: hidden;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  & #baseLayout #nomeTurma,
+  & #baseLayout #nomeTurma p {
+    color: var(--sg-heading);
+    font-weight: 700;
+  }
+
+  &.sg-turma-ready #baseLayout #nomeTurma {
+    display: none;
+  }
+
+  & #baseLayout .sg-turma {
+    order: 1;
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+
+  & #baseLayout .sg-turma-code {
+    flex: none;
+    padding: 5px 12px;
+    border-radius: 8px;
+    background: var(--sg-brand);
+    color: var(--sg-on-brand);
+    font-size: 13px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+  }
+
+  & #baseLayout .sg-turma-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  & #baseLayout .sg-turma-name {
+    overflow: hidden;
+    color: var(--sg-heading);
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    line-height: 1.15;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  & #baseLayout .sg-turma-meta {
+    overflow: hidden;
+    color: var(--sg-text-muted);
+    font-size: 12px;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Usuário: avatar com iniciais, nome, unidade */
+  & #baseLayout #painelDadosUsuario {
+    order: 2;
+    display: grid;
+    flex: 0 1 auto;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 10px;
+    min-width: 0;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    color: var(--sg-text-muted);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  & #baseLayout .sg-avatar {
+    display: grid;
+    grid-row: 1 / span 2;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sg-header-from), var(--sg-header-to));
+    box-shadow: 0 0 0 2px var(--sg-surface), 0 0 0 3px var(--sg-border-strong);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+
+  & #baseLayout #painelDadosUsuario > :is(p, div) {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  & #baseLayout #painelDadosUsuario > p {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 0;
+    overflow: hidden;
+    color: var(--sg-text);
+    font-size: 13px !important;
+    text-overflow: ellipsis;
+  }
+
+  & #baseLayout #painelDadosUsuario > p a {
+    font-size: 12px !important;
+    font-weight: 600;
+  }
+
+  & #baseLayout #painelDadosUsuario > p img {
+    width: 12px !important;
+    margin-right: 3px;
+    vertical-align: -2px;
+  }
+
+  & #baseLayout #painelDadosUsuario > div {
+    overflow: hidden;
+    font-size: 11.5px !important;
+    text-overflow: ellipsis;
+  }
+
+  /* ---------- Botões de ação ---------- */
+  & #baseLayout #menuTurmaVirtual {
+    position: static !important;
+    order: 3;
+    flex: none;
+  }
+
+  & #baseLayout #formAcoesTurma {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  & #baseLayout #formAcoesTurma button.ui-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-sizing: border-box;
+    width: auto !important;
+    height: 36px !important;
+    margin: 0 !important;
+    padding: 0 14px 0 12px !important;
+    border: 1px solid var(--sg-border-strong) !important;
+    border-radius: 10px !important;
+    font-size: 13px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  & #baseLayout #formAcoesTurma button.ui-button .ui-icon {
+    position: static;
+    flex: none;
+    margin: 0;
+  }
+
+  /* Botões só com ícone: o rótulo vem do title; o texto "pf-button" some */
+  & #baseLayout #formAcoesTurma button.ui-button-icon-only .ui-button-text {
+    display: none;
+  }
+
+  & #baseLayout #formAcoesTurma button.ui-button-icon-only::after {
+    font-weight: 600;
+  }
+
+  & #baseLayout #formAcoesTurma button[id$="botaoPortalDiscente"]::after {
+    content: "Menu Discente";
+  }
+
+  & #baseLayout #formAcoesTurma button[id$="botaoImprimir"]::after {
+    content: "Imprimir";
+  }
+
+  & #baseLayout #formAcoesTurma button[id$="visualizarPaginadas"]::after {
+    content: "Aulas paginadas";
+  }
+
+  & #baseLayout #formAcoesTurma button[id$="botaoExibirOpcoes"]::after {
+    content: "Opções";
+  }
+
+  /*
+   * Botão de trocar de turma: tem texto próprio ("Sair da Turma"/"Trocar de
+   * Turma"). O skin.css do PrimeFaces põe .ui-button-text com padding
+   * !important (reservando o espaço do ícone), então aqui também precisa.
+   */
+  & #baseLayout #formAcoesTurma button.ui-button-text-icon-primary .ui-button-text {
+    padding: 0 !important;
+    line-height: 1;
+  }
+
+  /* ---------- Menu suspenso do botão de opções ---------- */
+  /* Abre logo abaixo da faixa; fundo, borda e altura vêm inline; "ponta" e sombra são imagens. */
+  & #baseLayout #painel-usuario {
+    top: 100% !important;
+    right: 16px !important;
+    height: auto !important;
+    margin-top: 6px;
+    padding: 8px;
+    border: 1px solid var(--sg-border-strong) !important;
+    border-radius: var(--sg-radius);
+    background: var(--sg-surface);
+    box-shadow: var(--sg-shadow-lg);
+    color: var(--sg-text);
+  }
+
+  & #baseLayout #painel-usuario > div:not(#menu-usuario) {
+    display: none;
+  }
+
+  & #baseLayout #painel-usuario #menu-usuario {
+    background: transparent !important;
+  }
+
+  & #baseLayout #painel-usuario #menu-usuario li a {
+    border: 1px solid var(--sg-border);
+    border-radius: 8px;
+    background-color: var(--sg-surface-2);
+    color: var(--sg-text);
+    font-size: 12.5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color var(--sg-ease), border-color var(--sg-ease);
+  }
+
+  & #baseLayout #painel-usuario #menu-usuario li a:hover {
+    border-color: var(--sg-brand);
+    background-color: var(--sg-hover);
+    color: var(--sg-link-hover);
+  }
+
+  /* ---------- Janelas médias: tira o que é secundário ---------- */
+  @media (max-width: 1700px) {
+    & #baseLayout #painelDadosUsuario > div {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1650px) {
+    /* Só ícones nos botões (o title explica); o de trocar de turma mantém o texto */
+    & #baseLayout #formAcoesTurma button.ui-button-icon-only {
+      padding: 0 11px !important;
+    }
+
+    & #baseLayout #formAcoesTurma button.ui-button-icon-only::after {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1250px) {
+    & #baseLayout #info-sistema h3,
+    & #baseLayout #info-sistema span.relogioAva {
+      display: none;
+    }
+
+    & #baseLayout #painelDadosUsuario > p {
+      display: none;
+    }
+
+    & #baseLayout .sg-avatar {
+      grid-row: 1;
+    }
+  }
+}
+
+/* Os botões "Buscar" e do menu lateral não existem no SIGAA original: só aparecem com o tema ligado */
+.sg-bar-search,
+.sg-nav-toggle {
+  display: none;
+}

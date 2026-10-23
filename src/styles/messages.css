@@ -1,0 +1,66 @@
+/*
+ * Mensagens de feedback do sistema (#painel-erros): sucesso, aviso e erro.
+ * Mantém o ícone .gif original à esquerda e troca o resto por um cartão.
+ */
+html[data-sg="on"]:not(.contrast) {
+  & #painel-erros {
+    margin: 12px 20px 4px;
+    padding: 0 0 22px;
+    background: transparent;
+  }
+
+  & #painel-erros ul {
+    margin: 0;
+    padding: 12px 18px 12px 64px;
+    border: 1px solid var(--sg-border);
+    border-left-width: 4px;
+    border-radius: var(--sg-radius);
+    background-color: var(--sg-surface-2);
+    background-position: 14px center;
+    box-shadow: var(--sg-shadow-sm);
+  }
+
+  & #painel-erros li {
+    margin-top: 4px;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  & #painel-erros ul.info {
+    border-color: var(--sg-success);
+    background-color: var(--sg-success-bg);
+  }
+
+  & #painel-erros ul.info li {
+    color: var(--sg-success);
+  }
+
+  & #painel-erros ul.warning {
+    border-color: var(--sg-accent);
+    background-color: var(--sg-warning-bg);
+  }
+
+  & #painel-erros ul.warning li {
+    color: var(--sg-warning);
+  }
+
+  & #painel-erros ul.erros {
+    border-color: var(--sg-danger);
+    background-color: var(--sg-danger-bg);
+  }
+
+  & #painel-erros ul.erros li {
+    color: var(--sg-danger);
+  }
+
+  & #painel-erros #fechar-painel-erros a:link,
+  & #painel-erros #fechar-painel-erros a:visited {
+    color: var(--sg-text-muted) !important;
+    font-size: 0.9em;
+    font-weight: 500;
+  }
+
+  & #painel-erros #fechar-painel-erros a:hover {
+    color: var(--sg-text) !important;
+  }
+}

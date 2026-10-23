@@ -1,0 +1,183 @@
+/*
+ * Campos e botões. No SIGAA os botões são os nativos do navegador (cinza),
+ * então este é um dos ganhos visuais mais claros.
+ */
+html[data-sg="on"]:not(.contrast) {
+  & input[type="text"],
+  & input[type="password"],
+  & input[type="email"],
+  & input[type="search"],
+  & input[type="number"],
+  & input[type="date"],
+  & input[type="tel"],
+  & input[type="url"],
+  & input:not([type]),
+  & textarea,
+  & select {
+    box-sizing: border-box;
+    padding: 6px 10px;
+    border: 1px solid var(--sg-border-strong);
+    border-radius: 8px;
+    background-color: var(--sg-surface);
+    color: var(--sg-text);
+    font-family: inherit;
+    font-size: 1em;
+    line-height: 1.4;
+    transition: border-color var(--sg-ease), box-shadow var(--sg-ease), background-color var(--sg-ease);
+  }
+
+  & select {
+    padding-right: 28px;
+    font-weight: normal;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  & textarea {
+    padding: 8px 10px;
+  }
+
+  & input[type="text"]:hover,
+  & input[type="password"]:hover,
+  & textarea:hover,
+  & select:hover {
+    border-color: var(--sg-brand);
+  }
+
+  & input[type="text"]:focus,
+  & input[type="password"]:focus,
+  & input[type="email"]:focus,
+  & input[type="search"]:focus,
+  & input[type="number"]:focus,
+  & input:not([type]):focus,
+  & textarea:focus,
+  & select:focus {
+    border: 1px solid var(--sg-brand-strong);
+    background-color: var(--sg-surface);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--sg-focus);
+  }
+
+  & input:disabled,
+  & select:disabled,
+  & textarea:disabled,
+  & input[readonly] {
+    background-color: var(--sg-surface-3);
+    color: var(--sg-text-muted);
+    cursor: not-allowed;
+  }
+
+  & input[type="checkbox"],
+  & input[type="radio"] {
+    accent-color: var(--sg-brand);
+  }
+
+  & input.leitura,
+  & input.noborder,
+  & .noborder input {
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  & ::placeholder {
+    color: var(--sg-text-muted);
+    opacity: 0.8;
+  }
+
+  /* ---------- Botões ---------- */
+  & input[type="submit"],
+  & input[type="button"],
+  & input[type="reset"],
+  & #conteudo button:not(.ui-button):not([class*="rich-"]) {
+    margin: 0 3px;
+    padding: 7px 16px;
+    border: 1px solid var(--sg-border-strong);
+    border-radius: 8px;
+    background: var(--sg-surface);
+    color: var(--sg-text);
+    box-shadow: var(--sg-shadow-sm);
+    font-family: inherit;
+    font-size: 1em;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: background-color var(--sg-ease), border-color var(--sg-ease),
+      box-shadow var(--sg-ease), transform var(--sg-ease);
+  }
+
+  /* Algumas telas trazem style="padding: 1px" inline em botões soltos (ex.: Cancelar) */
+  & input[type="submit"][style*="padding"],
+  & input[type="button"][style*="padding"] {
+    padding: 7px 16px !important;
+  }
+
+  & input[type="submit"]:hover,
+  & input[type="button"]:hover,
+  & input[type="reset"]:hover,
+  & #conteudo button:not(.ui-button):not([class*="rich-"]):hover {
+    border-color: var(--sg-brand);
+    background: var(--sg-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--sg-shadow-md);
+  }
+
+  & input[type="submit"]:active,
+  & input[type="button"]:active,
+  & input[type="reset"]:active {
+    transform: translateY(0);
+    box-shadow: var(--sg-shadow-sm);
+  }
+
+  & input[type="submit"]:focus-visible,
+  & input[type="button"]:focus-visible,
+  & input[type="reset"]:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--sg-focus);
+  }
+
+  /* Ação principal: botões "submit" (Buscar, Entrar, Cadastrar, Confirmar...) */
+  & input[type="submit"] {
+    border-color: var(--sg-brand);
+    background: var(--sg-brand);
+    color: var(--sg-on-brand);
+  }
+
+  & input[type="submit"]:hover {
+    border-color: var(--sg-brand-strong);
+    background: var(--sg-brand-strong);
+  }
+
+  /* ...menos os de cancelar/voltar, que ficam como ação secundária */
+  & input[type="submit"][value^="Cancelar" i],
+  & input[type="submit"][value^="Voltar" i],
+  & input[type="submit"][value^="<<" i],
+  & input[type="submit"][value^="Limpar" i] {
+    border-color: var(--sg-border-strong);
+    background: var(--sg-surface);
+    color: var(--sg-text);
+  }
+
+  & input[type="submit"][value^="Cancelar" i]:hover,
+  & input[type="submit"][value^="Voltar" i]:hover,
+  & input[type="submit"][value^="<<" i]:hover,
+  & input[type="submit"][value^="Limpar" i]:hover {
+    border-color: var(--sg-brand);
+    background: var(--sg-hover);
+  }
+
+  & input:disabled[type="submit"],
+  & input:disabled[type="button"] {
+    border-color: var(--sg-border);
+    background: var(--sg-surface-3);
+    color: var(--sg-text-muted);
+    box-shadow: none;
+    transform: none;
+    cursor: not-allowed;
+  }
+
+  /* Asterisco de campo obrigatório */
+  & .required {
+    padding-right: 14px;
+  }
+}

@@ -1,0 +1,246 @@
+/*
+ * Tabelas do SIGAA: listagem, formulario, visualizacao e variantes.
+ * O sistema é quase todo montado em tabelas, então este arquivo cobre a maior
+ * parte do conteúdo visível.
+ */
+html[data-sg="on"]:not(.contrast) {
+  /* ---------- Listagem ---------- */
+  & table.listagem,
+  & table.subListagem {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--sg-surface);
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius);
+    box-shadow: var(--sg-shadow-sm);
+    color: var(--sg-text);
+    font-size: 1em;
+    overflow: hidden;
+  }
+
+  & table.listagem caption,
+  & table.formulario caption,
+  & table.visualizacao caption,
+  & h3.tituloTabela {
+    padding: 11px 16px;
+    background: linear-gradient(135deg, var(--sg-header-from), var(--sg-header-to));
+    color: #ffffff;
+    font-size: 1em;
+    font-variant: normal;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-align: left;
+  }
+
+  & table.listagem caption.subListagem,
+  & table.listagem td.subListagem,
+  & table.listagem table caption {
+    margin: 0;
+    padding: 8px 16px;
+    background: var(--sg-surface-3);
+    border: 0;
+    border-bottom: 1px solid var(--sg-border);
+    color: var(--sg-heading);
+    font-variant: normal;
+    letter-spacing: 0;
+  }
+
+  & table.listagem > thead tr th,
+  & table.listagem > thead tr td,
+  & table.subListagem > thead tr th {
+    padding: 10px 14px;
+    background: var(--sg-surface-2);
+    border-bottom: 1px solid var(--sg-border);
+    color: var(--sg-text-muted);
+    font-size: 0.92em;
+    font-weight: 700;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  & table.listagem > tbody {
+    background: var(--sg-surface);
+    text-align: left;
+  }
+
+  & table.listagem > tbody tr td,
+  & table.listagem > tbody tr th {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--sg-border-soft);
+    transition: background-color var(--sg-ease);
+  }
+
+  & table.listagem tr.linhaPar td,
+  & table.listagem td.colPar {
+    background-color: var(--sg-surface);
+  }
+
+  & table.listagem tr.linhaImpar td,
+  & table.listagem td.colImpar {
+    background-color: var(--sg-surface-2);
+  }
+
+  & table.listagem tbody tr:not(.no-hover):hover td {
+    background-color: var(--sg-hover);
+  }
+
+  /* Linhas de grupo (período letivo, componente, etc.) */
+  & table.listagem tr.destaque td,
+  & table.listagem tr.periodo td,
+  & table.listagem tr.grupo td,
+  & table.listagem tr.componente_curricular td {
+    background-color: var(--sg-brand-soft);
+    border-bottom: 1px solid var(--sg-border);
+    color: var(--sg-heading);
+    font-weight: 700;
+  }
+
+  & table.listagem tr.disciplina td {
+    background-color: var(--sg-surface);
+    border-bottom: 1px solid var(--sg-border-soft);
+    color: var(--sg-text);
+  }
+
+  & table.listagem > tfoot,
+  & table.listagem > tfoot td,
+  & table.listagem > tfoot tr {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: var(--sg-surface-2);
+    color: var(--sg-text);
+    text-align: center;
+  }
+
+  & table.listagem .acoes i,
+  & table.listagem .acoes span {
+    font-size: 1.3em;
+  }
+
+  /* ---------- Formulário ---------- */
+  & table.formulario,
+  & table.subFormulario {
+    background: var(--sg-surface);
+    border-collapse: separate;
+    border-spacing: 0;
+    color: var(--sg-text);
+  }
+
+  & table.formulario {
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius);
+    box-shadow: var(--sg-shadow-sm);
+    overflow: hidden;
+  }
+
+  & table.formulario tr td,
+  & table.subFormulario tr td {
+    padding: 7px 12px;
+  }
+
+  & table.formulario tbody tr th,
+  & table.formulario tr th {
+    padding: 7px 8px 7px 14px;
+    color: var(--sg-text-muted);
+    font-weight: 600;
+    text-align: right;
+  }
+
+  & table.formulario thead tr th {
+    background: var(--sg-surface-2);
+    color: var(--sg-heading);
+    text-align: left;
+  }
+
+  & table.formulario tfoot tr,
+  & table.formulario tfoot tr td,
+  & tfoot.formulario tr td {
+    background: var(--sg-surface-2);
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+  }
+
+  /* ---------- Visualização (detalhes de um registro) ---------- */
+  & table.visualizacao {
+    width: 92%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--sg-surface);
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius);
+    box-shadow: var(--sg-shadow-sm);
+    color: var(--sg-text);
+    overflow: hidden;
+  }
+
+  & table.visualizacao tbody {
+    background: var(--sg-surface);
+  }
+
+  & table.visualizacao tbody tr th {
+    padding: 8px 10px 8px 14px;
+    color: var(--sg-text-muted);
+    font-weight: 600;
+    text-align: right;
+  }
+
+  & table.visualizacao tbody tr td {
+    padding: 8px 14px 8px 4px;
+    text-align: left;
+  }
+
+  & table.visualizacao tbody tr.secao td,
+  & table.visualizacao tbody tr.secao th {
+    padding: 10px 14px;
+    background: var(--sg-brand-soft);
+    border-bottom: 1px solid var(--sg-border);
+    color: var(--sg-heading);
+    font-size: 1em;
+    letter-spacing: 0;
+    text-align: left;
+  }
+
+  & table.visualizacao tfoot tr {
+    background: var(--sg-surface-2);
+  }
+
+  /* thead/linha cinza genéricos usados em várias telas */
+  & table thead,
+  & table tr.linhaCinza {
+    background-color: var(--sg-surface-2);
+  }
+
+  & .linhaPar {
+    background-color: var(--sg-surface);
+  }
+
+  & .linhaImpar {
+    background-color: var(--sg-surface-2);
+  }
+
+  /* Legenda de ícones de ação acima das listagens ("Acessar Turma Virtual") */
+  & div.infoAltRem {
+    margin: 0 0 10px;
+    padding: 8px 14px;
+    background: var(--sg-surface-2);
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius-sm);
+    color: var(--sg-text-muted);
+    font-variant: normal;
+    text-align: center;
+  }
+
+  & div.infoAltRem * {
+    font-variant: normal;
+  }
+
+  & .caixaBranca,
+  & .caixaCinza,
+  & .caixaCinzaMedio,
+  & .caixaCinzaEscura {
+    background-color: var(--sg-surface-2);
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius-sm);
+  }
+}

@@ -1,0 +1,222 @@
+/*
+ * Portal do Discente (/sigaa/portais/discente/discente.jsf): coluna do perfil,
+ * notícias e painéis (turmas, comunidades, atividades, fórum).
+ */
+html[data-sg="on"]:not(.contrast) {
+  & #portal-docente {
+    display: flow-root;
+    padding-bottom: 12px;
+  }
+
+  /* ---------- Coluna lateral (perfil e dados institucionais) ---------- */
+  & #perfil-docente {
+    float: right;
+    box-sizing: border-box;
+    width: 300px;
+    margin: 16px 16px 4px 0;
+    padding: 14px;
+    background: var(--sg-surface-2);
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius-lg);
+  }
+
+  & #perfil-docente .pessoal-docente {
+    margin: 0 0 4px;
+    background: transparent;
+  }
+
+  & #perfil-docente .foto img {
+    border-radius: var(--sg-radius);
+    box-shadow: var(--sg-shadow-sm);
+    object-fit: cover;
+  }
+
+  & #perfil-docente .pessoal-docente li a {
+    font-weight: 600;
+  }
+
+  & #perfil-docente p.info-docente {
+    margin: 10px 0;
+    color: var(--sg-heading);
+  }
+
+  & #perfil-docente p {
+    color: var(--sg-text);
+  }
+
+  & #perfil-docente #agenda-docente {
+    margin: 10px 0 0;
+    padding: 12px;
+    background: var(--sg-surface);
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius);
+    box-shadow: var(--sg-shadow-sm);
+    box-sizing: border-box;
+    width: auto;
+    color: var(--sg-text);
+  }
+
+  & #perfil-docente #agenda-docente h4 {
+    margin: 0 0 8px;
+    color: var(--sg-heading);
+    font-size: 1.1em;
+  }
+
+  & #perfil-docente form#form_links #agenda-docente {
+    padding: 8px;
+    text-align: center;
+  }
+
+  & #perfil-docente form#form_links #agenda-docente a img {
+    border-radius: var(--sg-radius-sm);
+    transition: transform var(--sg-ease), box-shadow var(--sg-ease);
+  }
+
+  & #perfil-docente form#form_links #agenda-docente a:hover img {
+    transform: translateY(-2px);
+    box-shadow: var(--sg-shadow-md);
+  }
+
+  & #perfil-docente #agenda-docente td,
+  & #perfil-docente #agenda-docente th,
+  & #perfil-docente #agenda-docente h5 {
+    color: var(--sg-text);
+  }
+
+  & #perfil-docente #agenda-docente h5 {
+    border-bottom-color: var(--sg-border);
+  }
+
+  & #perfil-docente table {
+    border-collapse: separate;
+    border-spacing: 0;
+    color: var(--sg-text);
+  }
+
+  & #perfil-docente table td,
+  & #perfil-docente table th {
+    padding: 2px 4px;
+  }
+
+  & #perfil-docente abbr {
+    border-bottom: 1px dotted var(--sg-text-muted);
+    text-decoration: none;
+  }
+
+  /*
+   * Barra de integralização curricular: o sistema pinta com style="" inline
+   * (fundo branco e "silver"), então só !important consegue trocar as cores.
+   */
+  & #perfil-docente td[style*="background: white"] {
+    border: 0 !important;
+    border-radius: 999px;
+    background: var(--sg-surface-3) !important;
+    overflow: hidden;
+  }
+
+  & #perfil-docente div[style*="background: silver"] {
+    background: var(--sg-brand) !important;
+    color: var(--sg-on-brand);
+    font-size: 0.85em;
+    font-weight: 700;
+  }
+
+  /* ---------- Coluna principal ---------- */
+  & #main-docente {
+    margin: 0 332px 0 0;
+    padding: 4px 0 8px 16px;
+  }
+
+  & #main-docente #noticias-portal {
+    margin: 12px 0 0;
+    padding: 16px 20px;
+    background: var(--sg-warning-bg);
+    border: 1px solid var(--sg-border);
+    border-left: 4px solid var(--sg-accent);
+    border-radius: var(--sg-radius);
+    color: var(--sg-text);
+    box-sizing: border-box;
+    width: auto;
+    height: auto;
+    min-height: 0;
+  }
+
+  & #main-docente #noticias-portal p.noticia.destaque {
+    color: var(--sg-text);
+    font-size: 1.15em;
+    font-weight: 700;
+  }
+
+  & #main-docente .simple-panel {
+    box-sizing: border-box;
+    width: auto;
+    margin: 16px 0 0;
+    padding: 14px 18px 12px;
+    background: var(--sg-surface);
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius);
+    box-shadow: var(--sg-shadow-sm);
+    color: var(--sg-text);
+  }
+
+  /* Tabelas dentro dos painéis (turmas, editais, fórum) */
+  & #main-docente thead th {
+    background: var(--sg-surface-2);
+    border-bottom: 1px solid var(--sg-border);
+    color: var(--sg-text-muted);
+  }
+
+  & #main-docente tr.odd {
+    background: var(--sg-surface-2);
+  }
+
+  & #main-docente tr.nivel td {
+    background: var(--sg-brand-soft);
+    color: var(--sg-heading);
+  }
+
+  & #main-docente .situacaoTurma,
+  & .situacaoTurma {
+    color: var(--sg-text-muted);
+  }
+
+  /* Título do painel: sai da posição "flutuante" e fica dentro do cartão */
+  & #main-docente .simple-panel h4 {
+    width: auto;
+    margin: 0 0 10px;
+    color: var(--sg-heading);
+    font-size: 1.05em;
+    font-variant: normal;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  & #main-docente .simple-panel p.vazio {
+    margin: 0;
+    padding: 12px;
+    background: var(--sg-surface-2);
+    border: 1px dashed var(--sg-border-strong);
+    border-radius: var(--sg-radius-sm);
+    color: var(--sg-text-muted);
+    font-style: normal;
+    text-align: center;
+  }
+
+  & #main-docente .simple-panel span.mais,
+  & #portal-docente .mais {
+    display: block;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid var(--sg-border);
+    text-align: right;
+  }
+
+  /* Fórum do curso dentro do portal */
+  & #main-docente #forum-portal div.descricaoOperacao {
+    margin: 0 0 12px;
+  }
+
+  & #main-docente #forum-portal table.listagem {
+    box-shadow: none;
+  }
+}

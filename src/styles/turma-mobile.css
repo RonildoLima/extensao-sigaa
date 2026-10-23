@@ -1,0 +1,355 @@
+/*
+ * Turma Virtual no celular e em janelas estreitas (até 900px).
+ *
+ * No desktop o jQuery layout posiciona os painéis de forma absoluta, com
+ * tamanhos inline calculados por JavaScript. Aqui o layout vira fluxo normal,
+ * uma coluna que rola com a página:
+ *
+ *   barra do sistema (fixa no topo) > faixa da turma > conteúdo >
+ *   blocos da direita > rodapé
+ *
+ * O menu lateral vira uma gaveta aberta pelo botão ☰ (criado pelo turma.js).
+ * !important é necessário: o plugin regrava position/top/left/width/height
+ * inline a cada resize. Fora desta media query nada muda.
+ */
+@media (max-width: 900px) {
+  html[data-sg="on"]:not(.contrast) {
+    /* O jQuery layout segue achando que o painel norte tem 48px; os painéis estão fora dele. */
+    --sg-turma-header-h: 48px;
+
+    & body:has(#baseLayout) {
+      height: auto !important;
+      overflow: visible !important;
+    }
+
+    &.sg-nav-open body:has(#baseLayout) {
+      overflow: hidden !important;
+    }
+
+    & #baseLayout {
+      position: relative !important;
+      display: flex;
+      flex-direction: column;
+      height: auto !important;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow: visible !important;
+    }
+
+    & #baseLayout :is(.ui-layout-resizer, .ui-layout-toggler) {
+      display: none !important;
+    }
+
+    & #baseLayout :is(#conteudo, #barraDireita, #rodape) {
+      position: static !important;
+      inset: auto !important;
+      width: auto !important;
+      height: auto !important;
+      margin: 0 !important;
+      overflow: visible !important;
+      border: 0;
+    }
+
+    /* As duas faixas do topo viram itens do fluxo; a barra do sistema fica fixa ao rolar */
+    & #baseLayout #cabecalho {
+      display: contents !important;
+    }
+
+    & #baseLayout #info-sistema {
+      position: sticky;
+      top: 0;
+      z-index: 1500;
+      order: -2;
+      height: 52px;
+      margin: 0;
+      padding: 0 10px;
+      gap: 8px;
+    }
+
+    /*
+     * O formulário do menu lateral só serve de pai da gaveta, mas traz um "--"
+     * solto (resto do JSF) que no desktop fica escondido atrás do topo.
+     */
+    & #baseLayout > form#formMenu {
+      height: 0;
+      overflow: visible;
+      font-size: 0;
+      line-height: 0;
+    }
+
+    & #baseLayout #cabecalho > div:not(#info-sistema) {
+      order: -1;
+    }
+
+    & #baseLayout #conteudo {
+      order: 1;
+    }
+
+    & #baseLayout #barraDireita {
+      order: 2;
+    }
+
+    & #baseLayout #rodape {
+      order: 3;
+    }
+
+    /* ---------- Barra do sistema ---------- */
+    & #baseLayout #info-sistema :is(h3, .ajuda-link, span.relogioAva, #tempoSessao em) {
+      display: none;
+    }
+
+    & #baseLayout #info-sistema h1 {
+      font-size: 16px;
+    }
+
+    & #baseLayout #info-sistema div.dir {
+      gap: 8px;
+    }
+
+    & #baseLayout #info-sistema #tempoSessao {
+      padding: 4px 10px;
+      font-size: 12px;
+    }
+
+    & #baseLayout #info-sistema span.sair-sistema a:link,
+    & #baseLayout #info-sistema span.sair-sistema a:visited {
+      padding: 6px 14px;
+    }
+
+    & #baseLayout #info-sistema .sg-nav-toggle {
+      display: inline-flex;
+      flex: none;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      margin: 0 2px 0 -4px;
+      padding: 0;
+      border: 1px solid rgb(255 255 255 / 0.35);
+      border-radius: 10px;
+      background: rgb(255 255 255 / 0.1);
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    & #baseLayout #info-sistema .sg-nav-toggle svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+    }
+
+    & #baseLayout #info-sistema .sg-bar-search {
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: 10px;
+    }
+
+    & #baseLayout #info-sistema .sg-bar-search :is(span, kbd) {
+      display: none;
+    }
+
+    & #baseLayout #info-sistema .sg-bar-search svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* ---------- Faixa da turma ---------- */
+    & #baseLayout #cabecalho > div:not(#info-sistema) {
+      flex-wrap: wrap;
+      height: auto;
+      padding: 14px 12px;
+      gap: 12px;
+      background: var(--sg-surface);
+    }
+
+    & #baseLayout :is(.sg-turma, #nomeTurma) {
+      flex: 1 1 100%;
+    }
+
+    & #baseLayout .sg-turma {
+      align-items: flex-start;
+    }
+
+    & #baseLayout .sg-turma-name {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      font-size: 18px;
+      white-space: normal;
+    }
+
+    & #baseLayout .sg-turma-meta {
+      white-space: normal;
+    }
+
+    & #baseLayout #painelDadosUsuario {
+      order: 2;
+      flex: 1 1 100%;
+    }
+
+    & #baseLayout #painelDadosUsuario {
+      white-space: normal;
+    }
+
+    & #baseLayout #painelDadosUsuario > p {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 8px;
+      overflow: visible;
+    }
+
+    & #baseLayout #painelDadosUsuario > div {
+      display: none;
+    }
+
+    & #baseLayout .sg-avatar {
+      grid-row: 1;
+    }
+
+    & #baseLayout #menuTurmaVirtual {
+      order: 3;
+      flex: 1 1 100%;
+    }
+
+    & #baseLayout #formAcoesTurma {
+      display: grid;
+      grid-template-columns: repeat(3, 48px) minmax(0, 1fr) 48px;
+      gap: 8px;
+    }
+
+    & #baseLayout #formAcoesTurma button.ui-button {
+      justify-content: center;
+      height: 44px !important;
+      padding: 0 !important;
+    }
+
+    & #baseLayout #formAcoesTurma button.ui-button-text-icon-primary {
+      padding: 0 12px !important;
+    }
+
+    /* Menu de opções: folha presa à base da tela, com os atalhos em duas colunas */
+    & #baseLayout #painel-usuario {
+      position: fixed !important;
+      inset: auto 12px 12px !important;
+      z-index: 3000 !important;
+      margin: 0;
+      padding: 10px;
+    }
+
+    & #baseLayout #painel-usuario #menu-usuario ul {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    & #baseLayout #painel-usuario #menu-usuario li {
+      float: none;
+      width: auto;
+      margin: 0;
+    }
+
+    /* O ícone de cada atalho é imagem de fundo pensada para uma linha de 22px: recentraliza na de 44px */
+    & #baseLayout #painel-usuario #menu-usuario li a {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      min-height: 44px;
+      height: auto;
+      padding-left: 42px;
+      background-position: 12px 50%;
+    }
+
+    /* ---------- Gaveta do menu lateral ---------- */
+    /* display:block !important: com pouco espaço o plugin esconde o painel com display:none inline */
+    & #barraEsquerda {
+      position: fixed !important;
+      inset: 0 auto 0 0 !important;
+      z-index: 2000 !important;
+      display: block !important;
+      width: min(310px, 86vw) !important;
+      height: auto !important;
+      padding-bottom: 24px;
+      font-size: 13px;
+      overflow-y: auto !important;
+      visibility: hidden !important;
+      transform: translateX(-105%);
+      box-shadow: var(--sg-shadow-lg);
+      transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 220ms;
+    }
+
+    &.sg-nav-open #barraEsquerda {
+      visibility: visible !important;
+      transform: none;
+      transition-delay: 0s;
+    }
+
+    & #barraEsquerda > table {
+      margin: 22px 14px 8px;
+    }
+
+    & #barraEsquerda .itemMenu {
+      padding: 10px 12px;
+    }
+
+    & #barraEsquerda :is(.rich-panelbar-header, .rich-panelbar-header-act) {
+      min-height: 44px;
+    }
+
+    & .sg-nav-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 1900;
+      background: rgb(6 9 20 / 0.55);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 220ms;
+    }
+
+    &.sg-nav-open .sg-nav-backdrop {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ---------- Conteúdo e blocos da direita ---------- */
+    & #baseLayout #conteudo.ui-layout-center {
+      padding: 14px 12px 20px;
+    }
+
+    & #baseLayout #scroll-wrapper form#formAva {
+      max-width: none;
+    }
+
+    & .topico-aula {
+      padding: 14px 14px 10px;
+    }
+
+    /* HTML dos professores: tabelas e mídias largas rolam em vez de estourar a tela */
+    & .topico-aula .conteudotopico {
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    & .topico-aula :is(img, video, iframe, embed, object) {
+      max-width: 100%;
+      height: auto;
+    }
+
+    & #baseLayout #barraDireita {
+      padding: 4px 12px 24px;
+      background: var(--sg-bg);
+    }
+
+    & #barraDireita > table {
+      display: none;
+    }
+
+    & #barraDireita .blocoDireita {
+      margin: 12px 0 0;
+    }
+  }
+}

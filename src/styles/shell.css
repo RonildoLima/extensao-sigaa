@@ -1,0 +1,578 @@
+/*
+ * Casca comum às telas logadas: container, barra do sistema, painel do
+ * usuário, menu dropdown (jsCookMenu) e rodapé.
+ *
+ * #container    = páginas internas (portal, listagens, formulários)
+ * #baseLayout   = Turma Virtual (tela cheia, jQuery layout). Lá só trocamos
+ *                 cores: as alturas dos painéis são calculadas pelo plugin.
+ */
+html[data-sg="on"]:not(.contrast) {
+  /* Fundo da página: remove a imagem de sombra lateral do SIGAA */
+  &.background,
+  & body.background {
+    background: var(--sg-bg);
+  }
+
+  & #container {
+    width: auto;
+    max-width: var(--sg-max-width);
+    margin: 20px auto;
+    background: var(--sg-surface);
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius-lg);
+    box-shadow: var(--sg-shadow-md);
+  }
+
+  & #container #cabecalho {
+    background: transparent;
+  }
+
+  /* ---------- Barra do sistema ---------- */
+  :is(#container, #baseLayout) #info-sistema {
+    background: linear-gradient(135deg, var(--sg-header-from), var(--sg-header-to));
+    border-bottom: 3px solid var(--sg-accent);
+    color: #ffffff;
+    box-sizing: border-box;
+  }
+
+  #container #info-sistema {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    min-height: 42px;
+    padding: 6px 20px 5px;
+    border-radius: var(--sg-radius-lg) var(--sg-radius-lg) 0 0;
+  }
+
+  :is(#container, #baseLayout) #info-sistema h1 {
+    font-size: 1.2em;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+  }
+
+  :is(#container, #baseLayout) #info-sistema h1 span {
+    margin-right: 6px;
+    font-family: var(--sg-font);
+    font-size: 1em;
+    letter-spacing: 0.08em;
+  }
+
+  :is(#container, #baseLayout) #info-sistema h3 {
+    font-size: 1em;
+    font-weight: 400;
+    opacity: 0.92;
+  }
+
+  :is(#container, #baseLayout) #info-sistema a:link,
+  :is(#container, #baseLayout) #info-sistema a:visited {
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  :is(#container, #baseLayout) #info-sistema a:hover {
+    color: var(--sg-accent);
+    text-decoration: none;
+  }
+
+  /* Acessibilidade, sessão e sair (lado direito da barra) */
+  #container #info-sistema div.dir {
+    position: static;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    width: auto;
+    height: auto;
+    margin: 0 0 0 auto;
+    padding: 0;
+  }
+
+  #container #info-sistema div.dir > span {
+    position: static;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-size: 1em;
+  }
+
+  #container #info-sistema span#tempoSessao,
+  #container #info-sistema div#tempoSessao {
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.14);
+    font-size: 0.92em;
+  }
+
+  /*
+   * Na Caixa Postal (e telas afins) o relógio e o SAIR são filhos diretos de
+   * #info-sistema, sem o div.dir das demais telas, e o sair-sistema é
+   * posicionado de forma absoluta pelo CSS do SIGRH.
+   */
+  #container #info-sistema > #tempoSessao {
+    position: static;
+    margin-left: auto;
+    width: auto;
+  }
+
+  #container #info-sistema > span.sair-sistema {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  #container #info-sistema span.sair-sistema p {
+    margin: 0;
+    background: none;
+  }
+
+  #container #info-sistema span.sair-sistema a:link,
+  #container #info-sistema span.sair-sistema a:visited {
+    display: inline-block;
+    padding: 3px 14px;
+    border: 1px solid rgb(255 255 255 / 0.45);
+    border-radius: 999px;
+    color: #ffffff;
+    font-weight: 700;
+    transition: background var(--sg-ease), color var(--sg-ease);
+  }
+
+  #container #info-sistema span.sair-sistema a:hover {
+    background: #ffffff;
+    color: var(--sg-header-to);
+  }
+
+  /* ---------- Painel do usuário ---------- */
+  #container #painel-usuario {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 8px 16px;
+    min-height: 0;
+    padding: 12px 20px;
+    background: var(--sg-surface-2);
+    border-bottom: 1px solid var(--sg-border);
+    color: var(--sg-text);
+    box-sizing: border-box;
+  }
+
+  #container #painel-usuario #info-usuario {
+    order: 1;
+    float: none;
+    flex: 1 1 340px;
+    position: relative;
+    width: auto;
+    padding: 0;
+  }
+
+  #container #painel-usuario #info-usuario p.usuario {
+    width: auto;
+    font-size: 1.05em;
+    font-weight: 700;
+    color: var(--sg-heading);
+  }
+
+  #container #painel-usuario #info-usuario p.unidade {
+    width: auto;
+    margin-top: 2px;
+    color: var(--sg-text-muted);
+    font-size: 0.95em;
+  }
+
+  #container #painel-usuario #info-usuario p.periodo-atual {
+    float: right;
+    margin-left: 12px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--sg-brand-soft);
+    color: var(--sg-heading);
+    font-size: 0.92em;
+  }
+
+  #container #painel-usuario #menu-usuario {
+    order: 2;
+    float: none;
+    flex: 0 1 460px;
+    width: auto;
+    padding: 0;
+    background: none;
+  }
+
+  #container #painel-usuario #menu-usuario ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  #container #painel-usuario #menu-usuario li {
+    float: none;
+    flex: 1 1 130px;
+    width: auto;
+    margin: 0;
+  }
+
+  #container #painel-usuario #menu-usuario li a {
+    display: block;
+    padding: 7px 10px 7px 32px;
+    background-color: var(--sg-surface);
+    background-position: 9px center;
+    border: 1px solid var(--sg-border);
+    border-radius: 8px;
+    color: var(--sg-text);
+    font-size: 0.92em;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: var(--sg-shadow-sm);
+    transition: border-color var(--sg-ease), background-color var(--sg-ease), transform var(--sg-ease);
+  }
+
+  #container #painel-usuario #menu-usuario li a:hover {
+    background-color: var(--sg-hover);
+    border-color: var(--sg-brand);
+    color: var(--sg-link-hover);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+
+  /* ---------- Menu dropdown (jsCookMenu "ThemeOffice") ---------- */
+  #container #menu-dropdown {
+    padding: 6px 14px;
+    background: var(--sg-surface);
+    border-bottom: 1px solid var(--sg-border);
+  }
+
+  #container #menu-dropdown .ThemeOfficeMenu {
+    border-collapse: separate;
+    border-spacing: 2px;
+  }
+
+  #container #menu-dropdown td.ThemeOfficeMainItem,
+  #container #menu-dropdown td.ThemeOfficeMainItemHover,
+  #container #menu-dropdown td.ThemeOfficeMainItemActive {
+    padding: 2px 4px;
+    border: 0;
+    border-radius: 8px;
+    background-color: transparent;
+    color: var(--sg-text);
+    transition: background-color var(--sg-ease);
+  }
+
+  #container #menu-dropdown td.ThemeOfficeMainItemHover,
+  #container #menu-dropdown td.ThemeOfficeMainItemActive {
+    background-color: var(--sg-brand-soft);
+  }
+
+  #container #menu-dropdown td.ThemeOfficeMainItem > span,
+  #container #menu-dropdown td.ThemeOfficeMainItemHover > span,
+  #container #menu-dropdown td.ThemeOfficeMainItemActive > span {
+    border: 0;
+    background: none;
+  }
+
+  #container #menu-dropdown .ThemeOfficeMainFolderText {
+    font-size: 1em;
+    font-weight: 600;
+  }
+
+  /* Submenus: painéis suspensos */
+  .ThemeOfficeSubMenu {
+    overflow: hidden;
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius);
+    background: var(--sg-surface);
+    box-shadow: var(--sg-shadow-lg);
+    filter: none;
+  }
+
+  .ThemeOfficeSubMenuTable {
+    border-collapse: separate;
+    border-spacing: 0;
+    padding: 4px;
+    font-family: var(--sg-font);
+    font-size: 1em;
+  }
+
+  tr.ThemeOfficeMenuItem,
+  tr.ThemeOfficeMenuItemHover,
+  tr.ThemeOfficeMenuItemActive {
+    background-color: var(--sg-surface);
+    color: var(--sg-text);
+  }
+
+  tr.ThemeOfficeMenuItemHover,
+  tr.ThemeOfficeMenuItemActive {
+    background-color: var(--sg-brand-soft);
+  }
+
+  .ThemeOfficeMenuItemLeft,
+  .ThemeOfficeMenuItemText,
+  .ThemeOfficeMenuItemRight,
+  .ThemeOfficeMenuFolderLeft,
+  .ThemeOfficeMenuFolderText,
+  .ThemeOfficeMenuFolderRight,
+  .ThemeOfficeMenuItem .ThemeOfficeMenuItemLeft,
+  .ThemeOfficeMenuItem .ThemeOfficeMenuItemText,
+  .ThemeOfficeMenuItem .ThemeOfficeMenuItemRight,
+  .ThemeOfficeMenuItem .ThemeOfficeMenuFolderLeft,
+  .ThemeOfficeMenuItem .ThemeOfficeMenuFolderText,
+  .ThemeOfficeMenuItem .ThemeOfficeMenuFolderRight {
+    border: 0;
+    background-color: transparent;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+
+  .ThemeOfficeMenuItemText,
+  .ThemeOfficeMenuFolderText {
+    padding-left: 8px;
+    padding-right: 14px;
+    font-weight: 500;
+  }
+
+  tr.ThemeOfficeMenuItem td:first-child,
+  tr.ThemeOfficeMenuItemHover td:first-child,
+  tr.ThemeOfficeMenuItemActive td:first-child {
+    border-radius: 6px 0 0 6px;
+  }
+
+  tr.ThemeOfficeMenuItem td:last-child,
+  tr.ThemeOfficeMenuItemHover td:last-child,
+  tr.ThemeOfficeMenuItemActive td:last-child {
+    border-radius: 0 6px 6px 0;
+  }
+
+  .ThemeOfficeMenuSplit,
+  tr.ThemeOfficeMenuSplit td {
+    background-color: var(--sg-border);
+    border-top: 0;
+  }
+
+  /* ---------- Rodapé ---------- */
+  #container #rodape {
+    margin-top: 8px;
+    border-top: 3px solid var(--sg-accent);
+    border-radius: 0 0 var(--sg-radius-lg) var(--sg-radius-lg);
+    background: linear-gradient(135deg, var(--sg-header-from), var(--sg-header-to));
+    color: #ffffff;
+  }
+
+  #container #rodape p {
+    padding: 8px 12px;
+    color: #ffffff;
+  }
+
+  #container #rodape a:link,
+  #container #rodape a:visited {
+    color: #ffffff;
+  }
+
+  /* Link "Portal do Discente" que fica logo acima do rodapé */
+  #container > div > a:link,
+  #container > div > a:visited {
+    display: inline-block;
+    margin: 14px 0 6px;
+  }
+
+  /* ---------- Aviso de cookies (LGPD) ---------- */
+  /* Troca a faixa cinza de largura total (que cobria o login) por um cartão no canto */
+  & dialog.cookie-consent-modal {
+    inset: auto 20px 20px auto;
+    box-sizing: border-box;
+    width: min(440px, calc(100vw - 40px));
+    max-width: none;
+    margin: 0;
+    padding: 20px 22px;
+    background: var(--sg-surface);
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius-lg);
+    box-shadow: var(--sg-shadow-lg);
+    color: var(--sg-text);
+    font-size: 1em;
+    line-height: 1.55;
+    text-align: left;
+  }
+
+  /* No celular o cartão vira uma faixa menor, para cobrir menos do conteúdo */
+  @media (max-width: 600px) {
+    & dialog.cookie-consent-modal {
+      inset: auto 12px 12px;
+      width: auto;
+      padding: 14px 16px;
+      font-size: 0.92em;
+      line-height: 1.45;
+    }
+
+    & dialog.cookie-consent-modal button {
+      margin-top: 10px;
+      padding: 8px 18px;
+    }
+  }
+
+  & dialog.cookie-consent-modal > .container {
+    max-width: none;
+    padding: 0;
+  }
+
+  & dialog.cookie-consent-modal a {
+    color: var(--sg-link);
+  }
+
+  & dialog.cookie-consent-modal button {
+    margin: 14px 0 0 auto;
+    padding: 8px 20px;
+    background: var(--sg-brand);
+    border-radius: 8px;
+    color: var(--sg-on-brand);
+    transition: background-color var(--sg-ease);
+  }
+
+  & dialog.cookie-consent-modal button:hover,
+  & dialog.cookie-consent-modal button:focus-visible {
+    background: var(--sg-brand-strong);
+  }
+
+  /* ---------- Diálogos jQuery UI (ex.: popup "Módulos do SIGAA") ---------- */
+  & .ui-dialog {
+    padding: 0;
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius-lg);
+    background: var(--sg-surface);
+    color: var(--sg-text);
+    box-shadow: var(--sg-shadow-lg);
+    overflow: hidden;
+  }
+
+  & .ui-dialog .ui-dialog-titlebar {
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 0;
+    background: linear-gradient(135deg, var(--sg-header-from), var(--sg-header-to));
+    background-image: linear-gradient(135deg, var(--sg-header-from), var(--sg-header-to));
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  & .ui-dialog .ui-dialog-title {
+    color: #ffffff;
+  }
+
+  & .ui-dialog .ui-dialog-content {
+    background: var(--sg-surface);
+    color: var(--sg-text);
+  }
+
+  & .ui-widget-overlay {
+    background: #060914;
+    opacity: 0.55;
+  }
+
+  /* Grade de módulos e portais */
+  & #menu_principal.popup {
+    padding: 0 8px 8px;
+    border: 0;
+    background: transparent;
+  }
+
+  & #menu_principal ul {
+    border: 0;
+  }
+
+  & #menu_principal ul li {
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius);
+    background-color: var(--sg-surface-2);
+    overflow: hidden;
+    transition: border-color var(--sg-ease), box-shadow var(--sg-ease), transform var(--sg-ease);
+  }
+
+  & #menu_principal ul li:hover {
+    border-color: var(--sg-brand);
+    box-shadow: var(--sg-shadow-md);
+    transform: translateY(-1px);
+  }
+
+  & #menu_principal li a:link,
+  & #menu_principal li a:visited {
+    background-color: var(--sg-brand-soft);
+    background-image: none;
+    color: var(--sg-heading);
+    font-size: 0.92em;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  & #menu_principal li.on a:link,
+  & #menu_principal li.on a:visited {
+    background-color: var(--sg-brand);
+    color: var(--sg-on-brand);
+  }
+
+  & #menu_principal h2 {
+    margin: 8px 0 10px;
+    padding: 6px 4px;
+    background: transparent;
+    border-bottom: 1px solid var(--sg-border);
+    color: var(--sg-heading);
+    font-size: 1em;
+    font-variant: normal;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* Módulos sem permissão (o sistema pinta o texto de #EEE sobre fundo escuro) */
+  & #menu_principal .tooltip {
+    color: var(--sg-text-muted);
+    font-weight: 500;
+  }
+
+  & #menu_principal li.off {
+    opacity: 0.85;
+  }
+
+  /* ---------- Janelas internas "ydlg" (Módulos do SIGAA, Alterar senha...) ---------- */
+  & .ydlg {
+    border-radius: var(--sg-radius-lg);
+    box-shadow: var(--sg-shadow-lg);
+    overflow: hidden;
+  }
+
+  & .ydlg .ydlg-hd-left,
+  & .ydlg .ydlg-hd-right,
+  & .ydlg .ydlg-dlg-body {
+    background-color: transparent;
+    background-image: none;
+  }
+
+  & .ydlg .ydlg-dlg-body {
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius-lg);
+  }
+
+  & .ydlg .ydlg-hd {
+    background-color: var(--sg-header-to);
+    background-image: linear-gradient(135deg, var(--sg-header-from), var(--sg-header-to));
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  & .ydlg .ydlg-bd,
+  & .ydlg #container-popup {
+    background: var(--sg-surface);
+    color: var(--sg-text);
+  }
+
+  /* Botão "Informar problema" e painel de mensagens do SIGAA */
+  & #painel-mensagem-envio_c,
+  & #painel-mensagem-envio {
+    color-scheme: inherit;
+  }
+}

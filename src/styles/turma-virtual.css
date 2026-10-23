@@ -1,0 +1,379 @@
+/*
+ * Turma Virtual (AVA): layout de tela cheia montado pelo plugin jQuery layout
+ * (#baseLayout com painéis north/west/center/east/south).
+ *
+ * Aqui só mexemos em cores, bordas, tipografia e espaçamento interno: as
+ * dimensões dos painéis são calculadas por JavaScript e não podem mudar.
+ * A tela é reconhecida pelo DOM (#baseLayout), pois a URL não muda.
+ */
+html[data-sg="on"]:not(.contrast) {
+  & body:has(#baseLayout) {
+    background: var(--sg-bg);
+  }
+
+  /* ---------- Painéis e divisórias ---------- */
+  & #baseLayout .ui-layout-pane {
+    background: var(--sg-surface);
+    border: 1px solid var(--sg-border);
+    color: var(--sg-text);
+  }
+
+  & #baseLayout .ui-layout-resizer {
+    background: var(--sg-bg);
+  }
+
+  & #baseLayout .ui-layout-toggler {
+    background: var(--sg-border-strong);
+    border-radius: 3px;
+  }
+
+  /* A barra superior (#cabecalho) fica em turma-header.css. */
+
+  /*
+   * Campo de 1px (estilo inline) que o SIGAA usa para detectar o clique fora do
+   * menu de opções. O estilo genérico de input o deixaria visível: tira do fluxo.
+   */
+  & #auxEsconderSubMenu {
+    position: absolute;
+    padding: 0;
+    opacity: 0;
+  }
+
+  /* Botões da barra da turma (PrimeFaces / jQuery UI) */
+  & #baseLayout .ui-button,
+  & #baseLayout .ui-state-default,
+  & #baseLayout .ui-widget-content .ui-state-default {
+    border: 1px solid var(--sg-border-strong);
+    border-radius: 8px;
+    background-color: var(--sg-surface);
+    background-image: none; /* tira a textura "glass" do tema jQuery UI */
+    color: var(--sg-text);
+    font-weight: 600;
+    transition: background-color var(--sg-ease), border-color var(--sg-ease);
+  }
+
+  & #baseLayout .ui-button .ui-button-text {
+    color: inherit;
+  }
+
+  & #baseLayout .ui-button:hover,
+  & #baseLayout .ui-state-hover,
+  & #baseLayout .ui-state-focus,
+  & #baseLayout .ui-state-active {
+    border-color: var(--sg-brand);
+    background-color: var(--sg-hover);
+    background-image: none;
+    color: var(--sg-link-hover);
+  }
+
+  /* ---------- Menu da turma (coluna esquerda) ---------- */
+  & #barraEsquerda {
+    background: var(--sg-surface);
+  }
+
+  /*
+   * O título "Menu Turma Virtual" vem com estilo inline (imagem de fundo azul,
+   * cor, tamanho, centralização e borda): !important é a única forma de trocar.
+   */
+  & #barraEsquerda > table {
+    width: auto !important;
+    margin: 14px 14px 4px;
+    border: 0 !important;
+  }
+
+  & #barraEsquerda > table td {
+    height: auto !important;
+    padding: 0 4px;
+    background: none !important;
+    color: var(--sg-text-muted) !important;
+    font-size: 10.5px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em;
+    text-align: left !important;
+    text-transform: uppercase;
+  }
+
+  /*
+   * Sanfona do RichFaces: cada seção tem um cabeçalho "fechado" e outro "ativo"
+   * (um deles fica display:none) e o conteúdo logo abaixo. O ícone de cada
+   * seção é uma imagem de fundo posta pela turma.css; aqui só o reposicionamos.
+   */
+  & #barraEsquerda .rich-panelbar {
+    border: 0;
+    background: transparent;
+  }
+
+  /*
+   * Ao carregar, o RichFaces calcula a altura do conteúdo aberto como
+   * (altura da sanfona - soma do offsetHeight de cada seção). Só dá "sobra
+   * zero" (e o conteúdo fica com a altura natural) se nada vazar para fora
+   * das seções: por isso o espaço entre elas é padding, não margin vertical.
+   */
+  & #barraEsquerda .rich-panelbar-interior {
+    margin: 0 8px;
+    padding: 1px 0;
+  }
+
+  /* display:flex centraliza o texto; os cabeçalhos escondidos têm display:none inline e continuam escondidos */
+  & #barraEsquerda :is(.rich-panelbar-header, .rich-panelbar-header-act) {
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    height: auto;
+    min-height: 34px;
+    margin: 0;
+    padding: 8px 30px 8px 36px;
+    border: 0;
+    border-radius: 8px;
+    background-color: transparent;
+    background-position: 10px 50%;
+    background-repeat: no-repeat;
+    color: var(--sg-heading);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-indent: 0;
+    transition: background-color var(--sg-ease);
+  }
+
+  & #barraEsquerda .rich-panelbar-header:hover {
+    background-color: var(--sg-hover);
+  }
+
+  & #barraEsquerda .rich-panelbar-header-act {
+    background-color: var(--sg-brand-soft);
+  }
+
+  /* Seta: aponta para a direita na seção fechada e para baixo na aberta */
+  & #barraEsquerda :is(.rich-panelbar-header, .rich-panelbar-header-act)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid var(--sg-text-muted);
+    border-bottom: 2px solid var(--sg-text-muted);
+    transform: translateY(-50%) rotate(-45deg);
+    transition: transform var(--sg-ease);
+  }
+
+  & #barraEsquerda .rich-panelbar-header-act::after {
+    transform: translateY(-70%) rotate(45deg);
+  }
+
+  & #barraEsquerda :is(.rich-panelbar-content-exterior, .rich-panelbar-content) {
+    background: transparent;
+  }
+
+  & #barraEsquerda .rich-panelbar-content-exterior {
+    padding: 2px 0 6px;
+  }
+
+  /* Itens da seção, com uma linha-guia à esquerda */
+  & #barraEsquerda .itemMenu {
+    height: auto;
+    margin: 1px 0 1px 17px;
+    padding: 6px 10px;
+    border: 0;
+    border-left: 2px solid var(--sg-border);
+    border-radius: 0 7px 7px 0;
+    background: transparent;
+    color: var(--sg-text);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.35;
+    text-indent: 0;
+    transition: background-color var(--sg-ease), border-color var(--sg-ease), color var(--sg-ease);
+  }
+
+  & #barraEsquerda .itemMenu:hover {
+    border-left-color: var(--sg-brand);
+    background: var(--sg-hover);
+    color: var(--sg-link-hover);
+  }
+
+  /* O link envolve o item (a > div.itemMenu): sem sublinhado herdado no hover */
+  & #barraEsquerda a:is(:link, :visited, :hover, :active) {
+    text-decoration: none;
+  }
+
+  /* ---------- Blocos da coluna direita ---------- */
+  & #barraDireita {
+    background: var(--sg-surface);
+  }
+
+  /* Faixa com a seta que recolhe a coluna: título e borda vêm inline (fundo em imagem azul) */
+  & #barraDireita > table {
+    border-bottom: 1px solid var(--sg-border) !important;
+  }
+
+  & #barraDireita #toggleDireita {
+    height: auto !important;
+    padding: 5px 10px !important;
+    background: var(--sg-surface-2) !important;
+  }
+
+  & #barraDireita #toggleDireita img {
+    border-radius: 4px;
+  }
+
+  & #barraDireita .blocoDireita {
+    margin: 8px 8px 12px;
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius);
+    background: var(--sg-surface);
+    box-shadow: var(--sg-shadow-sm);
+    overflow: hidden;
+  }
+
+  & #barraDireita .headerBloco {
+    height: auto;
+    padding: 7px 12px;
+    border-bottom: 1px solid var(--sg-border);
+    border-radius: 0;
+    background-color: var(--sg-surface-2);
+    background-image: none;
+    color: var(--sg-heading);
+    font-size: 1em;
+    font-weight: 700;
+  }
+
+  & #barraDireita .rich-stglpanel-body {
+    background: var(--sg-surface);
+    color: var(--sg-text);
+    font-size: 0.92em;
+    padding: 8px 10px;
+  }
+
+  & #barraDireita .rich-stglpanel-body :is(td, li, span, div, small) {
+    font-size: inherit;
+  }
+
+  & #barraDireita span.data {
+    color: var(--sg-text-muted);
+  }
+
+  & #barraDireita ul.menu-direita li {
+    padding: 3px 0;
+  }
+
+  /* ---------- Conteúdo central ---------- */
+  & #baseLayout #conteudo.ui-layout-center {
+    padding: 8px 28px 20px;
+    background: var(--sg-surface);
+  }
+
+  & #baseLayout #scroll-wrapper form#formAva {
+    display: block;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  & #ultimaNoticia.descricaoOperacao {
+    margin: 12px 0 18px;
+    background: var(--sg-warning-bg);
+    border-left-color: var(--sg-accent);
+  }
+
+  & #ultimaNoticia h4 {
+    color: var(--sg-heading);
+  }
+
+  & .topico-aula {
+    margin: 0 0 12px;
+    padding: 16px 18px 12px;
+    border: 1px solid var(--sg-border);
+    border-radius: var(--sg-radius);
+    background: var(--sg-surface);
+    box-shadow: var(--sg-shadow-sm);
+  }
+
+  & .topico-aula .titulo {
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--sg-border);
+    color: var(--sg-heading);
+    font-size: 1.15em;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  & .topico-aula h4 {
+    margin: 8px 0;
+    color: var(--sg-text-muted);
+    font-size: 1em;
+  }
+
+  & .topico-aula .descricao-aula {
+    padding: 6px 0 6px 2px;
+    color: var(--sg-text);
+    line-height: 1.6;
+  }
+
+  & .topico-aula .conteudotopico {
+    color: var(--sg-text);
+    line-height: 1.6;
+  }
+
+  /*
+   * O texto das aulas é HTML livre dos professores (colado do Word, com
+   * "times new roman" e "font-size: small" inline). !important é a única
+   * forma de uniformizar a fonte sem mexer no conteúdo.
+   */
+  & .topico-aula .conteudotopico :is(p, span, div, li, ol, ul, td, th, font, b, strong, i, em, u, a, h1, h2, h3, h4, h5, h6) {
+    font-family: var(--sg-font) !important;
+  }
+
+  & .topico-aula .conteudotopico :is(pre, code, kbd, samp, tt),
+  & .topico-aula .conteudotopico :is(pre, code, kbd, samp, tt) * {
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace !important;
+  }
+
+  & .topico-aula .materiais div {
+    padding: 4px 0;
+  }
+
+  /* ---------- Rodapé ---------- */
+  & #baseLayout #rodape {
+    border: 0;
+    border-top: 3px solid var(--sg-accent);
+    background: linear-gradient(135deg, var(--sg-header-from), var(--sg-header-to));
+    color: #ffffff;
+  }
+
+  & #baseLayout #rodape p,
+  & #baseLayout #rodape a:link,
+  & #baseLayout #rodape a:visited {
+    color: #ffffff;
+  }
+}
+
+/*
+ * Modo escuro e conteúdo dos professores.
+ *
+ * O HTML escrito pelos professores traz cores inline pensadas para fundo
+ * branco (texto preto, destaques em #f9fbfd...). Em vez de tentar consertar
+ * cada caso, o bloco inteiro é invertido (invert + hue-rotate mantém os
+ * matizes) e as mídias são invertidas de volta para ficarem normais.
+ */
+html[data-sg="on"][data-sg-scheme="dark"]:not(.contrast) {
+  & .topico-aula .conteudotopico,
+  & #ultimaNoticia .conteudoNoticia {
+    background: transparent;
+    color: #1a1a1a;
+    filter: invert(1) hue-rotate(180deg);
+  }
+
+  & .topico-aula .conteudotopico a:link,
+  & .topico-aula .conteudotopico a:visited,
+  & #ultimaNoticia .conteudoNoticia a:link,
+  & #ultimaNoticia .conteudoNoticia a:visited {
+    color: #1f4fbf;
+  }
+
+  & .topico-aula .conteudotopico :is(img, video, iframe, canvas, svg, object, embed),
+  & #ultimaNoticia .conteudoNoticia :is(img, video, iframe, canvas, svg, object, embed) {
+    filter: invert(1) hue-rotate(180deg);
+  }
+}
