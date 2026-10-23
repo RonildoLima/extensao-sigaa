@@ -4,6 +4,33 @@ Extensão de navegador que dá um visual moderno ao SIGAA da UFCG, com tema clar
 
 > Projeto independente, sem vínculo oficial com a UFCG ou a UFRN.
 
+## Como fica
+
+Mesma tela de login, com o SIGAA original à esquerda e com a extensão à direita:
+
+![Tela de login do SIGAA dividida ao meio: visual original à esquerda e visual novo à direita](loja/capturas/1-antes-e-depois.png)
+
+<table>
+  <tr>
+    <td width="50%"><img src="loja/capturas/3-login-claro.png" alt="Tela de login do SIGAA com a extensão, tema claro"></td>
+    <td width="50%"><img src="loja/capturas/4-login-escuro.png" alt="Tela de login do SIGAA com a extensão, tema escuro"></td>
+  </tr>
+  <tr>
+    <td align="center">Tema claro</td>
+    <td align="center">Tema escuro</td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="loja/capturas/2-busca-ctrl-k.png" alt="Busca no menu aberta com Ctrl+K, mostrando resultados para a palavra matricula digitada sem acento"></td>
+    <td width="50%"><img src="loja/capturas/5-popup-tema.png" alt="Popup da extensão com o interruptor Ativar tema e a escolha de aparência"></td>
+  </tr>
+  <tr>
+    <td align="center">Busca no menu (Ctrl+K), sem precisar de acento</td>
+    <td align="center">Popup: liga/desliga e escolha do tema</td>
+  </tr>
+</table>
+
+As capturas são só de telas públicas: o resto do sistema só aparece depois do login, e as capturas dele mostrariam dados pessoais.
+
 ## O que muda
 
 - Largura fluida no lugar dos 984px fixos, fonte maior e hierarquia visual clara.
